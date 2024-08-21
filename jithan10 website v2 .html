@@ -1,65 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JT's Profile</title>
+    <title>JT's InfoSec Hub</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Arial", sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            color: #333;
         }
-        .header, .footer {
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2em;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 400;
+        }
+
+        .section {
+            padding: 4em 2em;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            font-weight: 300;
+            margin-bottom: 1em;
+        }
+
+        .section p {
+            font-size: 1.1em;
+            line-height: 1.6em;
+            color: #555;
+        }
+
+        .image-banner {
+            background: url('https://via.placeholder.com/1200x600') no-repeat center center;
+            background-size: cover;
+            height: 400px;
+            position: relative;
+        }
+
+        .image-banner .banner-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1em;
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+
+        .two-column-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2em;
+            margin: 2em 0;
+        }
+
+        .column {
+            flex: 1 1 45%;
+            background-color: #fff;
+            padding: 2em;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .column h3 {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+        }
+
+        .column p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .footer {
             background-color: #333;
             color: #fff;
             text-align: center;
             padding: 1em;
-        }
-        .content {
-            padding: 2em;
-        }
-        .section {
-            margin-bottom: 2em;
-        }
-        .section h2 {
-            color: #4CAF50;
-            font-size: 1.8em;
-        }
-        .section p {
-            font-size: 1.2em;
-            color: #555;
+            font-size: 0.9em;
         }
     </style>
 </head>
-<body>
 
+<body>
     <div class="header">
-        <h1>JT's Profile</h1>
+        <h1>Welcome to JT's InfoSec Hub</h1>
     </div>
 
-    <div class="content">
-        <div class="section">
-            <h2>About Me</h2>
-            <p>Welcome to my professional profile! Here, you can learn more about my background, projects, and interests.</p>
-        </div>
+    <!-- Hero Image Banner Section -->
+    <div class="image-banner">
+        <div class="banner-text">Simplified InfoSec News and Insights</div>
+    </div>
 
-        <div class="section">
-            <h2>My Work</h2>
-            <p>I've worked on various projects in the tech and InfoSec field, focusing on security solutions, automation, and cloud technologies.</p>
-        </div>
+    <!-- Section 1: Introduction -->
+    <div class="section">
+        <h2>About This Site</h2>
+        <p>This platform curates the latest information security news from trusted sources and presents it without distractions like ads, popups, or unnecessary styling. Dive in to stay updated with everything InfoSec.</p>
+    </div>
 
-        <div class="section">
-            <h2>Contact</h2>
-            <p>If you'd like to get in touch, feel free to reach out via LinkedIn or email. I'm always open to connecting and exploring new opportunities.</p>
+    <!-- Section 2: Two-Column Layout -->
+    <div class="section two-column-section">
+        <div class="column">
+            <h3>Why InfoSec Matters</h3>
+            <p>Information security is more crucial than ever in today’s digital age. Learn more about the key challenges and the latest industry trends to stay ahead.</p>
         </div>
+        <div class="column">
+            <h3>Our Mission</h3>
+            <p>Our goal is to provide clear, concise, and up-to-date InfoSec news without the noise, allowing professionals and enthusiasts to focus on what matters most.</p>
+        </div>
+    </div>
+
+    <!-- Section 3: Another Placeholder Section (You can add more content here) -->
+    <div class="section">
+        <h2>Explore More</h2>
+        <p>Discover articles, insights, and updates on key topics like cybersecurity, data privacy, and more. Our platform is constantly updated with the latest trends.</p>
     </div>
 
     <div class="footer">
         <p>&copy; 2024 JT. All rights reserved.</p>
     </div>
-    
-
 </body>
+
 </html>
