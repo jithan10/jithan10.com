@@ -3,124 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jithan Tennakoon - Professional Profile</title>
+    <title>InfoSec News - Jithan Tennakoon</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
         }
-        .header {
-            background-color: #4CAF50;
+        .header, .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+        .hero-section {
+            text-align: center;
+            padding: 2em;
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
             color: white;
-            padding: 10px 20px;
-            text-align: center;
         }
-        .tabs {
-            overflow: hidden;
-            background-color: #f1f1f1;
+        .hero-section h1 {
+            font-size: 2.5em;
         }
-        .tabs button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-            font-size: 17px;
+        .news-section {
+            padding: 2em;
         }
-        .tabs button:hover {
-            background-color: #ddd;
+        .news-card {
+            background: #fff;
+            margin: 1em;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .tabs button.active {
-            background-color: #ccc;
+        .news-card h2 {
+            font-size: 1.5em;
         }
-        .tab-content {
-            display: none;
-            padding: 20px;
-            border-top: none;
+        .news-card p {
+            font-size: 1em;
+            color: #555;
         }
-        .tab-content.active {
-            display: block;
+        .news-card a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #4CAF50;
+            text-decoration: none;
         }
-        .footer {
-            background-color: #f1f1f1;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+        .news-card a:hover {
+            text-decoration: underline;
         }
     </style>
     <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablink");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
+        async function loadNews() {
+            const response = await fetch('news_data.json');
+            const news = await response.json();
+
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = ''; // Clear any existing content
+
+            news.forEach(article => {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'news-card';
+
+                const title = document.createElement('h2');
+                title.innerText = article.title;
+
+                const description = document.createElement('p');
+                description.innerText = article.description;
+
+                const sourceLink = document.createElement('a');
+                sourceLink.href = article.link;
+                sourceLink.innerText = 'Read More';
+                sourceLink.target = '_blank';
+
+                const source = document.createElement('p');
+                source.className = 'source';
+                source.innerText = `Source: ${new URL(article.source).hostname}`;
+
+                newsCard.appendChild(title);
+                newsCard.appendChild(description);
+                newsCard.appendChild(sourceLink);
+                newsCard.appendChild(source);
+
+                newsContainer.appendChild(newsCard);
+            });
         }
-        document.addEventListener("DOMContentLoaded", function(){
-            document.getElementById("defaultOpen").click();
-        });
+
+        document.addEventListener('DOMContentLoaded', loadNews);
     </script>
 </head>
 <body>
-
     <div class="header">
-        <h1>Jithan Tennakoon</h1>
-        <p>Welcome to my professional profile</p>
+        <h1>InfoSec News Hub</h1>
     </div>
 
-    <div class="tabs">
-        <button class="tablink" onclick="openTab(event, 'Home')" id="defaultOpen">Home</button>
-        <button class="tablink" onclick="openTab(event, 'About')">About Me</button>
-        <button class="tablink" onclick="openTab(event, 'Portfolio')">Portfolio</button>
-        <button class="tablink" onclick="openTab(event, 'Resume')">Resume/CV</button>
-        <button class="tablink" onclick="openTab(event, 'Blog')">Blog</button>
-        <button class="tablink" onclick="openTab(event, 'Contact')">Contact</button>
-    </div>
-
-    <div id="Home" class="tab-content">
-        <h2>Home</h2>
-        <p>Welcome to my professional website!</p>
-    </div>
-
-    <div id="About" class="tab-content">
-        <h2>About Me</h2>
-        <p>Detailed bio including background, interests, and values.</p>
-    </div>
-
-    <div id="Portfolio" class="tab-content">
-        <h2>Portfolio</h2>
-        <p>Showcasing projects, work samples, and case studies.</p>
-    </div>
-
-    <div id="Resume" class="tab-content">
-        <h2>Resume/CV</h2>
-        <p>Online version of resume or CV with a downloadable option.</p>
-    </div>
-
-    <div id="Blog" class="tab-content">
-        <h2>Blog</h2>
-        <p>Articles, insights, and updates related to field or interests.</p>
-    </div>
-
-    <div id="Contact" class="tab-content">
-        <h2>Contact</h2>
-        <p>Contact information and form for visitors to reach you.</p>
+    <div id="news-container" class="news-section">
+        <!-- News will be loaded here by the script -->
     </div>
 
     <div class="footer">
         <p>&copy; 2024 Jithan Tennakoon. All rights reserved.</p>
     </div>
-
 </body>
 </html>
