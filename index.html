@@ -3,42 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Page</title>
+    <title>Jithan Tennakoon - InfoSec Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header, .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+        .hero-section {
+            text-align: center;
+            padding: 2em;
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
+            color: white;
+        }
+        .hero-section h1 {
+            font-size: 2.5em;
+        }
+        .news-section {
+            padding: 2em;
+        }
+        .news-card {
+            background: #fff;
+            margin: 1em;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .news-card h2 {
+            font-size: 1.5em;
+        }
+        .news-card p {
+            font-size: 1em;
+            color: #555;
+        }
+        .news-card a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .news-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Test Page</h1>
-    <div class="tabs">
-        <button class="tablink" onclick="openTab(event, 'Home')" id="defaultOpen">Home</button>
-        <button class="tablink" onclick="openTab(event, 'About')">About Me</button>
+
+    <div class="header">
+        <h1>Jithan Tennakoon - InfoSec Hub</h1>
     </div>
 
-    <div id="Home" class="tab-content">
-        <h2>Home</h2>
-        <p>Welcome to my professional website!</p>
+    <div class="hero-section">
+        <h1>Stay Informed with the Latest InfoSec News</h1>
+        <p>All the latest updates, without the clutter.</p>
     </div>
 
-    <div id="About" class="tab-content" style="display:none;">
-        <h2>About Me</h2>
-        <p>Here you can include your background, interests, and values.</p>
+    <div class="news-section">
+        <!-- This is where the scraped news articles will be displayed -->
+        <div class="news-card">
+            <h2>Example News Title</h2>
+            <p>Short description or excerpt of the news article...</p>
+            <a href="#" target="_blank">Read More</a>
+        </div>
     </div>
 
-    <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablink");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-        document.addEventListener("DOMContentLoaded", function(){
-            document.getElementById("defaultOpen").click();
-        });
-    </script>
+    <div class="footer">
+        <p>&copy; 2024 Jithan Tennakoon. All rights reserved.</p>
+    </div>
+
 </body>
 </html>
