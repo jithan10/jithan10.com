@@ -2,8 +2,8 @@ name: Scrape InfoSec News
 
 on:
   schedule:
-    # Schedule to run every day at midnight (UTC)
-    - cron: '0 0 * * *'
+    # Schedule to run every 15 minutes
+    - cron: '*/15 * * * *'
 
   workflow_dispatch: # Allow manual triggering of the action
 
