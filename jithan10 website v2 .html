@@ -3,117 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jithan Tennakoon - Professional Profile</title>
+    <title>InfoSec News - Jithan Tennakoon</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
         }
-        .header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
+        .header, .footer {
+            background-color: #333;
+            color: #fff;
             text-align: center;
+            padding: 1em;
         }
-        .content {
-            padding: 20px;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section h2 {
-            color: #4CAF50;
-        }
-        .section p {
-            margin: 0;
-        }
-        .footer {
+        .tabs {
+            overflow: hidden;
             background-color: #f1f1f1;
+        }
+        .tabs button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+        .tabs button:hover {
+            background-color: #ddd;
+        }
+        .tabs button.active {
+            background-color: #ccc;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border-top: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .hero-section {
             text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+            padding: 2em;
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
+            color: white;
         }
-        .profile-picture {
-            border-radius: 50%;
-            max-width: 150px;
+        .hero-section h1 {
+            font-size: 2.5em;
         }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>Jithan Tennakoon</h1>
-        <p>Welcome to my professional profile</p>
-    </div>
-
-    <div class="content">
-        <div class="section">
-            <img src="YOUR_FACEBOOK_PROFILE_PICTURE_URL" alt="Jithan Tennakoon" class="profile-picture">
-        </div>
-        <div class="section">
-            <h2>About Me</h2>
-            <p>Experience in operations and hardware with a demonstrated history of working in the security industry. Strong engineering professional skilled in AutoCAD, Microsoft Word, Google Suite, Adobe Creative Cloud. Teamwork, Leadership, and known as a jack of all trades.</p>
-        </div>
-        <div class="section">
-            <h2>Experience</h2>
-            <ul>
-                <li>Information Technology Administrator - Mach49 (August 2022 - Present)</li>
-                <li>Hardware Engineer & Internal Operations - Alcatraz AI (February 2019 - August 2022)</li>
-                <li>Logistics Coordinator - Singularity University (June 2015 - June 2019)</li>
-                <li>Electronics Technician - Roominate Toy (January 2013 - October 2014)</li>
-                <li>Engineering Institute Coordinator - San Francisco State University (June 2010 - June 2014)</li>
-                <li>Impact Team Member - Abercrombie & Fitch Co. (November 2011 - April 2014)</li>
-                <li>Teacher - Citizen Schools (March 2010 - July 2012)</li>
-                <li>Head Cashier - KFC (May 2009 - February 2010)</li>
-                <li>Head Cashier - In-N-Out Burger (March 2008 - June 2009)</li>
-                <li>Research Assistant - Alliant International University (January 2008 - December 2008)</li>
-            </ul>
-        </div>
-        <div class="section">
-            <h2>Education</h2>
-            <ul>
-                <li>Mechanical Engineering - Cañada College (2012 - 2015)</li>
-                <li>Attended - College of San Mateo</li>
-            </ul>
-        </div>
-        <div class="section">
-            <h2>Skills</h2>
-            <ul>
-                <li>Troubleshooting</li>
-                <li>Slack</li>
-                <li>Help Desk Support</li>
-                <li>AutoCAD</li>
-                <li>Microsoft Word</li>
-                <li>Google Suite</li>
-                <li>Adobe Creative Cloud</li>
-                <li>Teamwork</li>
-                <li>Leadership</li>
-            </ul>
-        </div>
-        <div class="section">
-            <h2>Languages</h2>
-            <ul>
-                <li>Sinhala</li>
-                <li>English</li>
-            </ul>
-        </div>
-        <div class="section">
-            <h2>Certifications</h2>
-            <ul>
-                <li>Java: Recursion</li>
-                <li>macOS for IT Administrators</li>
-            </ul>
-        </div>
-        <div class="section">
-            <h2>Contact</h2>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/jithan-tennakoon">linkedin.com/in/jithan-tennakoon</a></p>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>&copy; 2024 Jithan10 All rights reserved.</p>
-    </div>
-</body>
-</html>
+        .news-section {
+            padding: 2em;
+        }
+        .news-card {
+            background: #fff;
+            margin: 1em;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0,​⬤
