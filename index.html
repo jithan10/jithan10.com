@@ -87,12 +87,40 @@
             line-height: 1.6em;
         }
 
+        /* Image Banner Styling */
         .image-banner {
+            position: relative;
             background: url('https://jithan10.github.io/jithan10.com/image.webp') no-repeat center center;
             background-size: cover;
-            height: 400px;
+            height: 500px;
             margin: 2em 0;
             border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .image-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Adding a subtle dark overlay */
+        }
+
+        .banner-text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1em;
+            font-size: 2em;
+            font-weight: 300;
+            text-align: center;
+            border-radius: 5px;
+            max-width: 90%;
         }
 
         .footer {
@@ -138,7 +166,9 @@
 
     <div class="container">
         <!-- Hero Image Banner Section -->
-        <div class="image-banner"></div>
+        <div class="image-banner">
+            <div class="banner-text">Exploring Tech, Life, and Adventures</div>
+        </div>
 
         <!-- Section 1: Introduction -->
         <div class="section">
