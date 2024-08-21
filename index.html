@@ -1,198 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JT's InfoSec Hub</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Arial", sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            color: #333;
         }
-        .header, .footer {
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2em;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 400;
+        }
+
+        .section {
+            padding: 4em 2em;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            font-weight: 300;
+            margin-bottom: 1em;
+        }
+
+        .section p {
+            font-size: 1.1em;
+            line-height: 1.6em;
+            color: #555;
+        }
+
+        .image-banner {
+            background: url('https://via.placeholder.com/1200x600') no-repeat center center;
+            background-size: cover;
+            height: 400px;
+            position: relative;
+        }
+
+        .image-banner .banner-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1em;
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+
+        .two-column-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2em;
+            margin: 2em 0;
+        }
+
+        .column {
+            flex: 1 1 45%;
+            background-color: #fff;
+            padding: 2em;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .column h3 {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+        }
+
+        .column p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .footer {
             background-color: #333;
             color: #fff;
             text-align: center;
             padding: 1em;
-        }
-        .header h1 {
-            font-size: 2em;
-            margin: 0;
-        }
-        .tabs {
-            display: flex;
-            justify-content: center;
-            background-color: #444;
-            padding: 10px;
-        }
-        .tabs button {
-            background-color: #444;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .tabs button:hover {
-            background-color: #555;
-        }
-        .tabs button.active {
-            background-color: #888;
-        }
-        .tab-content {
-            display: none;
-            padding: 20px;
-            border-top: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .news-section {
-            padding: 2em;
-        }
-        .news-card {
-            background: #fff;
-            margin: 1em;
-            padding: 1em;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .news-card h2 {
-            font-size: 1.5em;
-        }
-        .news-card p {
-            font-size: 1em;
-            color: #555;
-        }
-        .news-card a {
-            display: inline-block;
-            margin-top: 10px;
-            color: #4CAF50;
-            text-decoration: none;
-        }
-        .news-card a:hover {
-            text-decoration: underline;
-        }
-        .refresh-button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .refresh-button:hover {
-            background-color: #45a049;
+            font-size: 0.9em;
         }
     </style>
-    <script>
-        async function loadNews() {
-            try {
-                const response = await fetch('news_data.json');
-                if (!response.ok) {
-                    throw new Error('Failed to load news data');
-                }
-                const news = await response.json();
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = ''; // Clear any existing content
-
-                news.forEach(article => {
-                    const newsCard = document.createElement('div');
-                    newsCard.className = 'news-card';
-
-                    const title = document.createElement('h2');
-                    title.innerText = article.title;
-
-                    const description = document.createElement('p');
-                    description.innerText = article.description;
-
-                    const sourceLink = document.createElement('a');
-                    sourceLink.href = article.link;
-                    sourceLink.innerText = 'Read More';
-                    sourceLink.target = '_blank';
-
-                    const source = document.createElement('p');
-                    source.className = 'source';
-                    source.innerText = `Source: ${new URL(article.source).hostname}`;
-
-                    newsCard.appendChild(title);
-                    newsCard.appendChild(description);
-                    newsCard.appendChild(sourceLink);
-                    newsCard.appendChild(source);
-
-                    newsContainer.appendChild(newsCard);
-                });
-            } catch (error) {
-                console.error('Error loading news:', error);
-            }
-        }
-
-        function openTab(evt, tabName) {
-            const tabcontent = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            const tablinks = document.getElementsByClassName("tablink");
-            for (let i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-
-        function refreshNews() {
-            // Reload the news data when the button is clicked
-            loadNews();
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('defaultOpen').click();
-            loadNews();
-        });
-    </script>
 </head>
+
 <body>
-
     <div class="header">
-        <h1>InfoSec News Hub</h1>
+        <h1>Welcome to JT's InfoSec Hub</h1>
     </div>
 
-    <div class="tabs">
-        <button class="tablink" onclick="openTab(event, 'Home')" id="defaultOpen">Home</button>
-        <button class="tablink" onclick="openTab(event, 'About')">About</button>
-        <button class="tablink" onclick="openTab(event, 'News')">News</button>
-        <button class="tablink" onclick="openTab(event, 'Contact')">Contact</button>
+    <!-- Hero Image Banner Section -->
+    <div class="image-banner">
+        <div class="banner-text">Simplified InfoSec News and Insights</div>
     </div>
 
-    <div id="Home" class="tab-content active">
-        <h2>Welcome to JT's InfoSec News Hub</h2>
-        <p>This hub gathers the latest InfoSec news from multiple sources and presents it without ads, popups, or other distractions.</p>
+    <!-- Section 1: Introduction -->
+    <div class="section">
+        <h2>About This Site</h2>
+        <p>This platform curates the latest information security news from trusted sources and presents it without distractions like ads, popups, or unnecessary styling. Dive in to stay updated with everything InfoSec.</p>
     </div>
 
-    <div id="About" class="tab-content">
-        <h2>About JT</h2>
-        <p>JT is passionate about InfoSec and technology, focusing on curating essential news for fellow enthusiasts.</p>
-    </div>
-
-    <div id="News" class="tab-content">
-        <button class="refresh-button" onclick="refreshNews()">Refresh News</button>
-        <div id="news-container" class="news-section">
-            <!-- News will be loaded here by the script -->
+    <!-- Section 2: Two-Column Layout -->
+    <div class="section two-column-section">
+        <div class="column">
+            <h3>Why InfoSec Matters</h3>
+            <p>Information security is more crucial than ever in today’s digital age. Learn more about the key challenges and the latest industry trends to stay ahead.</p>
+        </div>
+        <div class="column">
+            <h3>Our Mission</h3>
+            <p>Our goal is to provide clear, concise, and up-to-date InfoSec news without the noise, allowing professionals and enthusiasts to focus on what matters most.</p>
         </div>
     </div>
 
-    <div id="Contact" class="tab-content">
-        <h2>Contact JT</h2>
-        <p>If you’d like to get in touch, please reach out via LinkedIn or email.</p>
+    <!-- Section 3: Another Placeholder Section (You can add more content here) -->
+    <div class="section">
+        <h2>Explore More</h2>
+        <p>Discover articles, insights, and updates on key topics like cybersecurity, data privacy, and more. Our platform is constantly updated with the latest trends.</p>
     </div>
 
     <div class="footer">
         <p>&copy; 2024 JT. All rights reserved.</p>
     </div>
-
 </body>
+
 </html>
