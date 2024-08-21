@@ -36,6 +36,7 @@ def scrape_news():
     # Save the news to a JSON file
     with open('news_data.json', 'w') as f:
         json.dump(news, f, indent=4)
+        
 
 if __name__ == "__main__":
     scrape_news()
