@@ -55,4 +55,144 @@
         .news-card {
             background: #fff;
             margin: 1em;
-​⬤
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .news-card h2 {
+            font-size: 1.5em;
+        }
+        .news-card p {
+            font-size: 1em;
+            color: #555;
+        }
+        .news-card a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .news-card a:hover {
+            text-decoration: underline;
+        }
+        .refresh-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .refresh-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        async function loadNews() {
+            try {
+                const response = await fetch('news_data.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load news data');
+                }
+                const news = await response.json();
+                const newsContainer = document.getElementById('news-container');
+                newsContainer.innerHTML = ''; // Clear any existing content
+
+                news.forEach(article => {
+                    const newsCard = document.createElement('div');
+                    newsCard.className = 'news-card';
+
+                    const title = document.createElement('h2');
+                    title.innerText = article.title;
+
+                    const description = document.createElement('p');
+                    description.innerText = article.description;
+
+                    const sourceLink = document.createElement('a');
+                    sourceLink.href = article.link;
+                    sourceLink.innerText = 'Read More';
+                    sourceLink.target = '_blank';
+
+                    const source = document.createElement('p');
+                    source.className = 'source';
+                    source.innerText = `Source: ${new URL(article.source).hostname}`;
+
+                    newsCard.appendChild(title);
+                    newsCard.appendChild(description);
+                    newsCard.appendChild(sourceLink);
+                    newsCard.appendChild(source);
+
+                    newsContainer.appendChild(newsCard);
+                });
+            } catch (error) {
+                console.error('Error loading news:', error);
+            }
+        }
+
+        function openTab(evt, tabName) {
+            const tabcontent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            const tablinks = document.getElementsByClassName("tablink");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        function refreshNews() {
+            // Reload the news data when the button is clicked
+            loadNews();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('defaultOpen').click();
+            loadNews();
+        });
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        <h1>InfoSec News Hub</h1>
+    </div>
+
+    <div class="tabs">
+        <button class="tablink" onclick="openTab(event, 'Home')" id="defaultOpen">Home</button>
+        <button class="tablink" onclick="openTab(event, 'About')">About</button>
+        <button class="tablink" onclick="openTab(event, 'News')">News</button>
+        <button class="tablink" onclick="openTab(event, 'Contact')">Contact</button>
+    </div>
+
+    <div id="Home" class="tab-content active">
+        <h2>Welcome to JT's InfoSec News Hub</h2>
+        <p>This hub gathers the latest InfoSec news from multiple sources and presents it without ads, popups, or other distractions.</p>
+    </div>
+
+    <div id="About" class="tab-content">
+        <h2>About JT</h2>
+        <p>JT is passionate about InfoSec and technology, focusing on curating essential news for fellow enthusiasts.</p>
+    </div>
+
+    <div id="News" class="tab-content">
+        <button class="refresh-button" onclick="refreshNews()">Refresh News</button>
+        <div id="news-container" class="news-section">
+            <!-- News will be loaded here by the script -->
+        </div>
+    </div>
+
+    <div id="Contact" class="tab-content">
+        <h2>Contact JT</h2>
+        <p>If you’d like to get in touch, please reach out via LinkedIn or email.</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 JT. All rights reserved.</p>
+    </div>
+
+</body>
+</html>
