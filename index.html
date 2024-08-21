@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JT's Personal Hub</title>
+    <title>JT's Space</title>
     <style>
         body {
             font-family: "Arial", sans-serif;
@@ -15,15 +15,38 @@
         }
 
         .header {
-            background-color: #333;
+            background-color: #282c34;
             color: #fff;
             text-align: center;
-            padding: 2em;
+            padding: 4em 2em;
+            position: relative;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            font-weight: 400;
+            font-size: 3em;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            font-weight: 300;
+            margin-top: 0.5em;
+            letter-spacing: 1px;
+        }
+
+        .header:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, #ff6b6b, #f06595, #cc5de8);
+            opacity: 0.85;
+            z-index: -1;
+            mix-blend-mode: multiply;
         }
 
         .section {
@@ -100,7 +123,8 @@
 
 <body>
     <div class="header">
-        <h1>Welcome to JT's Hub</h1>
+        <h1>Welcome to JT’s World</h1>
+        <p>Where Technology, Creativity, and Passion Collide</p>
     </div>
 
     <!-- Hero Image Banner Section -->
@@ -118,7 +142,7 @@
     <div class="section two-column-section">
         <div class="column">
             <h3>My Projects</h3>
-            <p>From creating blueprints with Polycam to setting up complex IT systems, I’m always working on something interesting. I enjoy pushing the boundaries of what’s possible and finding creative solutions to everyday challenges.</p>
+            <p>I’m always working on something interesting. I enjoy pushing the boundaries of what’s possible and finding creative solutions to everyday challenges.</p>
         </div>
         <div class="column">
             <h3>Interests and Hobbies</h3>
