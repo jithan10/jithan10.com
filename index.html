@@ -4,160 +4,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JT's Space</title>
+    <title>JT - About Me</title>
     <style>
         body {
-            font-family: "Arial", sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #0e0e0e;
+            color: #eaeaea;
         }
 
         .header {
-            background-color: #282c34;
-            color: #fff;
-            text-align: center;
+            background: linear-gradient(135deg, #ff5f6d, #ffc371);
             padding: 4em 2em;
-            position: relative;
+            text-align: center;
+            color: #fff;
         }
 
         .header h1 {
             font-size: 3em;
-            font-weight: 700;
+            font-weight: bold;
             margin: 0;
-            letter-spacing: 2px;
         }
 
         .header p {
-            font-size: 1.2em;
-            font-weight: 300;
+            font-size: 1.5em;
             margin-top: 0.5em;
-            letter-spacing: 1px;
+            font-weight: 300;
         }
 
-        .header:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to right, #ff6b6b, #f06595, #cc5de8);
-            opacity: 0.85;
-            z-index: -1;
-            mix-blend-mode: multiply;
-        }
-
-        .section {
-            padding: 4em 2em;
-            text-align: center;
+        .container {
+            padding: 3em 2em;
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        .section {
+            margin-bottom: 4em;
+        }
+
         .section h2 {
-            font-size: 2em;
-            font-weight: 300;
-            margin-bottom: 1em;
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 0.5em;
         }
 
         .section p {
-            font-size: 1.1em;
+            font-size: 1.2em;
+            line-height: 1.8;
+            font-weight: 300;
+            color: #bbb;
+        }
+
+        .two-column-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2em;
+        }
+
+        .column {
+            flex: 1 1 45%;
+            background: #181818;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .column:hover {
+            transform: translateY(-10px);
+        }
+
+        .column h3 {
+            font-size: 2em;
+            color: #ff5f6d;
+            margin-bottom: 1em;
+        }
+
+        .column p {
+            font-size: 1em;
+            color: #ddd;
             line-height: 1.6em;
-            color: #555;
         }
 
         .image-banner {
             background: url('https://via.placeholder.com/1200x600') no-repeat center center;
             background-size: cover;
             height: 400px;
-            position: relative;
-        }
-
-        .image-banner .banner-text {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: #fff;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 1em;
-            font-size: 1.5em;
-            font-weight: 300;
-        }
-
-        .two-column-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 2em;
             margin: 2em 0;
-        }
-
-        .column {
-            flex: 1 1 45%;
-            background-color: #fff;
-            padding: 2em;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .column h3 {
-            font-size: 1.5em;
-            margin-bottom: 1em;
-        }
-
-        .column p {
-            color: #666;
-            font-size: 1em;
+            border-radius: 10px;
         }
 
         .footer {
-            background-color: #333;
-            color: #fff;
             text-align: center;
-            padding: 1em;
+            background-color: #1a1a1a;
+            padding: 2em;
+            color: #888;
             font-size: 0.9em;
+        }
+
+        .footer a {
+            color: #ffc371;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            margin-top: 2em;
+        }
+
+        .social-links a {
+            margin: 0 1em;
+            color: #ffc371;
+            font-size: 1.5em;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #ff5f6d;
         }
     </style>
 </head>
 
 <body>
     <div class="header">
-        <h1>Welcome to JT’s World</h1>
-        <p>Where Technology, Creativity, and Passion Collide</p>
+        <h1>Welcome to JT's World</h1>
+        <p>Where Creativity, Passion, and Technology Collide</p>
     </div>
 
-    <!-- Hero Image Banner Section -->
-    <div class="image-banner">
-        <div class="banner-text">Exploring Tech, Life, and Adventures</div>
-    </div>
+    <div class="container">
+        <!-- Hero Image Banner Section -->
+        <div class="image-banner"></div>
 
-    <!-- Section 1: Introduction -->
-    <div class="section">
-        <h2>About Me</h2>
-        <p>Hi, I'm JT! I have a deep passion for technology, electronics, and tinkering with all things mechanical. Whether it’s riding bikes, working on cars, or diving into the latest tech projects, I’m always looking for ways to learn and create.</p>
-    </div>
-
-    <!-- Section 2: Two-Column Layout -->
-    <div class="section two-column-section">
-        <div class="column">
-            <h3>My Projects</h3>
-            <p>I’m always working on something interesting. I enjoy pushing the boundaries of what’s possible and finding creative solutions to everyday challenges.</p>
+        <!-- Section 1: Introduction -->
+        <div class="section">
+            <h2>Who Am I?</h2>
+            <p>Hey, I'm JT. I'm a tech enthusiast who loves diving into complex projects, tinkering with gadgets, and exploring new ideas. My world is a mix of technology, creativity, and adventure. Whether I'm working on electronic setups, biking, or just hanging out with my two pups, I'm always on the lookout for something new to learn or create.</p>
         </div>
-        <div class="column">
-            <h3>Interests and Hobbies</h3>
-            <p>In addition to tech, I love riding bikes, tinkering with electronics, and spending time with my two puppies. Life is about balance, and I’m always trying to find that sweet spot between work, hobbies, and quality time with loved ones.</p>
-        </div>
-    </div>
 
-    <!-- Section 3: More About Me -->
-    <div class="section">
-        <h2>Exploring Life, One Challenge at a Time</h2>
-        <p>I’m a firm believer in continuous learning and improvement. Whether it’s picking up new skills, overcoming life’s challenges, or just enjoying the small moments, I aim to make the most out of every opportunity.</p>
+        <!-- Section 2: Two-Column Layout -->
+        <div class="section two-column-section">
+            <div class="column">
+                <h3>What I Do</h3>
+                <p>I’m constantly engaged in tech projects, building automations, and finding solutions that push the boundaries of what’s possible. I’ve also been involved in initiatives to enhance workflows, create interactive blueprints, and lead innovative ideas that make a difference.</p>
+            </div>
+            <div class="column">
+                <h3>Interests and Hobbies</h3>
+                <p>Beyond tech, I love getting outside, riding bikes, working on cars, and spending time with my family (especially the pups). Balancing tech and life is what keeps me motivated and creative.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: More About Me -->
+        <div class="section">
+            <h2>My Philosophy</h2>
+            <p>I believe in living life with curiosity, embracing challenges, and finding inspiration in everything around me. I’m passionate about self-improvement and constantly finding ways to evolve both personally and professionally.</p>
+        </div>
     </div>
 
     <div class="footer">
         <p>&copy; 2024 JT. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/jithan-tennakoon/" target="_blank">LinkedIn</a>
+            <a href="mailto:jithan10@gmail.com">Email Me</a>
+        </div>
     </div>
 </body>
 
