@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jithan Tennakoon - InfoSec Hub</title>
+    <title>InfoSec News - JT's Hub</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,30 +53,56 @@
             text-decoration: underline;
         }
     </style>
+    <script>
+        async function loadNews() {
+            const response = await fetch('news_data.json');
+            const news = await response.json();
+
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = ''; // Clear any existing content
+
+            news.forEach(article => {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'news-card';
+
+                const title = document.createElement('h2');
+                title.innerText = article.title;
+
+                const description = document.createElement('p');
+                description.innerText = article.description;
+
+                const sourceLink = document.createElement('a');
+                sourceLink.href = article.link;
+                sourceLink.innerText = 'Read More';
+                sourceLink.target = '_blank';
+
+                const source = document.createElement('p');
+                source.className = 'source';
+                source.innerText = `Source: ${new URL(article.source).hostname}`;
+
+                newsCard.appendChild(title);
+                newsCard.appendChild(description);
+                newsCard.appendChild(sourceLink);
+                newsCard.appendChild(source);
+
+                newsContainer.appendChild(newsCard);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadNews);
+    </script>
 </head>
 <body>
-
     <div class="header">
-        <h1>Jithan Tennakoon - InfoSec Hub</h1>
+        <h1>InfoSec News Hub</h1>
     </div>
 
-    <div class="hero-section">
-        <h1>Stay Informed with the Latest InfoSec News</h1>
-        <p>All the latest updates, without the clutter.</p>
-    </div>
-
-    <div class="news-section">
-        <!-- This is where the scraped news articles will be displayed -->
-        <div class="news-card">
-            <h2>Example News Title</h2>
-            <p>Short description or excerpt of the news article...</p>
-            <a href="#" target="_blank">Read More</a>
-        </div>
+    <div id="news-container" class="news-section">
+        <!-- News will be loaded here by the script -->
     </div>
 
     <div class="footer">
-        <p>&copy; 2024 Jithan Tennakoon. All rights reserved.</p>
+        <p>&copy; 2024 JT. All rights reserved.</p>
     </div>
-
 </body>
 </html>
