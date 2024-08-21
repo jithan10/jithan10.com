@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InfoSec News - JT's Hub</title>
+    <title>JT's InfoSec Hub</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,14 +17,37 @@
             text-align: center;
             padding: 1em;
         }
-        .hero-section {
-            text-align: center;
-            padding: 2em;
-            background: linear-gradient(to right, #4CAF50, #8BC34A);
-            color: white;
+        .header h1 {
+            font-size: 2em;
+            margin: 0;
         }
-        .hero-section h1 {
-            font-size: 2.5em;
+        .tabs {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 10px;
+        }
+        .tabs button {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .tabs button:hover {
+            background-color: #555;
+        }
+        .tabs button.active {
+            background-color: #888;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border-top: none;
+        }
+        .tab-content.active {
+            display: block;
         }
         .news-section {
             padding: 2em;
@@ -55,54 +78,73 @@
     </style>
     <script>
         async function loadNews() {
-            const response = await fetch('news_data.json');
-            const news = await response.json();
+            try {
+                const response = await fetch('news_data.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load news data');
+                }
+                const news = await response.json();
+                const newsContainer = document.getElementById('news-container');
+                newsContainer.innerHTML = ''; // Clear any existing content
 
-            const newsContainer = document.getElementById('news-container');
-            newsContainer.innerHTML = ''; // Clear any existing content
+                news.forEach(article => {
+                    const newsCard = document.createElement('div');
+                    newsCard.className = 'news-card';
 
-            news.forEach(article => {
-                const newsCard = document.createElement('div');
-                newsCard.className = 'news-card';
+                    const title = document.createElement('h2');
+                    title.innerText = article.title;
 
-                const title = document.createElement('h2');
-                title.innerText = article.title;
+                    const description = document.createElement('p');
+                    description.innerText = article.description;
 
-                const description = document.createElement('p');
-                description.innerText = article.description;
+                    const sourceLink = document.createElement('a');
+                    sourceLink.href = article.link;
+                    sourceLink.innerText = 'Read More';
+                    sourceLink.target = '_blank';
 
-                const sourceLink = document.createElement('a');
-                sourceLink.href = article.link;
-                sourceLink.innerText = 'Read More';
-                sourceLink.target = '_blank';
+                    const source = document.createElement('p');
+                    source.className = 'source';
+                    source.innerText = `Source: ${new URL(article.source).hostname}`;
 
-                const source = document.createElement('p');
-                source.className = 'source';
-                source.innerText = `Source: ${new URL(article.source).hostname}`;
+                    newsCard.appendChild(title);
+                    newsCard.appendChild(description);
+                    newsCard.appendChild(sourceLink);
+                    newsCard.appendChild(source);
 
-                newsCard.appendChild(title);
-                newsCard.appendChild(description);
-                newsCard.appendChild(sourceLink);
-                newsCard.appendChild(source);
-
-                newsContainer.appendChild(newsCard);
-            });
+                    newsContainer.appendChild(newsCard);
+                });
+            } catch (error) {
+                console.error('Error loading news:', error);
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', loadNews);
+        function openTab(evt, tabName) {
+            const tabcontent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            const tablinks = document.getElementsByClassName("tablink");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('defaultOpen').click();
+            loadNews();
+        });
     </script>
 </head>
 <body>
+
     <div class="header">
         <h1>InfoSec News Hub</h1>
     </div>
 
-    <div id="news-container" class="news-section">
-        <!-- News will be loaded here by the script -->
-    </div>
-
-    <div class="footer">
-        <p>&copy; 2024 JT. All rights reserved.</p>
-    </div>
-</body>
-</html>
+    <div class="tabs">
+        <button class="tablink" onclick="openTab(event, 'Home')" id="defaultOpen">Home</button>
+        <button class="tablink" onclick="openTab(event, 'About')">About</button>
+        <button class="tablink" onclick="openTab(event, 'News')">News</button>
+​⬤
