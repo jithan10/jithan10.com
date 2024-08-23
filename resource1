@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource 1 - JT's World</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0e0e0e;
+            color: #eaeaea;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff5f6d, #ffc371);
+            padding: 2em;
+            text-align: center;
+            color: #fff;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .container {
+            padding: 3em 2em;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 1em;
+        }
+
+        .section p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            font-weight: 300;
+            color: #bbb;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: #1a1a1a;
+            padding: 2em;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .footer a {
+            color: #ffc371;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Resource 1</h1>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>About Resource 1</h2>
+            <p>Here you can provide detailed information about Resource 1. You can add text, images, links, or any other content that is relevant to this resource.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 JT. All rights reserved.</p>
+    </div>
+</body>
+
+</html>
