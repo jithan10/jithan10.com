@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jithan Tennakoon - Professional Portfolio</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; scroll-behavior: smooth; }
         header { background: #333; color: #fff; padding: 10px 20px; }
         header h1 { margin: 0; }
+        header p { margin: 5px 0 10px; }
+        nav { margin-top: 10px; }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
         .container { padding: 20px; max-width: 800px; margin: 0 auto; }
         section { margin-bottom: 20px; }
         h2 { border-bottom: 2px solid #333; padding-bottom: 5px; }
@@ -22,38 +32,70 @@
     <header>
         <h1>Jithan Tennakoon</h1>
         <p>IT Administrator | Cybersecurity Professional | Innovator</p>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <a href="resource1.html">Resources</a> <!-- New Resources page link -->
+        </nav>
     </header>
     <div class="container">
-        <section>
+        <section id="about">
             <h2>About Me</h2>
             <p>Experienced IT Administrator with expertise in cybersecurity, team leadership, and technical support. Seeking to leverage my skills and experience in a challenging and dynamic role to drive innovation and efficiency.</p>
         </section>
-        <section>
+
+        <section id="certifications">
             <h2>Certifications</h2>
             <ul>
-                <li>Google Cybersecurity Professional Certificate</li><li>Contributor to Aramco Cybersecurity Compliance Certification</li>
+                <li>Google Cybersecurity Professional Certificate</li>
+                <li>Contributor to Aramco Cybersecurity Compliance Certification</li>
             </ul>
         </section>
-        <section>
+
+        <section id="experience">
             <h2>Experience</h2>
-            <h3>IT Support Administrator - Mach49 (August 2022 - Present)</h3><ul><li>Managed Kandji MDM deployments linked to Apple Business Manager.</li><li>Guided a remote user through setup on their first day, ensuring seamless access.</li><li>Conducted security risk assessments, including for Fathom AI.</li></ul><h3>Operations and Hardware Engineer - Alcatraz (June 2019 - July 2022)</h3><ul><li>Supervised hardware development and operations for security systems.</li><li>Implemented cross-functional workflows to streamline inventory management.</li></ul>
+            <h3>IT Support Administrator - Mach49 (August 2022 - Present)</h3>
+            <ul>
+                <li>Managed Kandji MDM deployments linked to Apple Business Manager.</li>
+                <li>Guided a remote user through setup on their first day, ensuring seamless access.</li>
+                <li>Conducted security risk assessments, including for Fathom AI.</li>
+            </ul>
+            <h3>Operations and Hardware Engineer - Alcatraz (June 2019 - July 2022)</h3>
+            <ul>
+                <li>Supervised hardware development and operations for security systems.</li>
+                <li>Implemented cross-functional workflows to streamline inventory management.</li>
+            </ul>
         </section>
-        <section>
+
+        <section id="skills">
             <h2>Skills</h2>
             <h3>Technical Skills</h3>
             <ul>
-                <li>IT Administration (Okta, Kandji MDM, Concur Solutions)</li><li>Cybersecurity tools and practices</li><li>Vendor and project management</li>
+                <li>IT Administration (Okta, Kandji MDM, Concur Solutions)</li>
+                <li>Cybersecurity tools and practices</li>
+                <li>Vendor and project management</li>
             </ul>
             <h3>Soft Skills</h3>
             <ul>
-                <li>Team leadership and mentorship</li><li>Cross-functional communication</li><li>Problem-solving under pressure</li>
+                <li>Team leadership and mentorship</li>
+                <li>Cross-functional communication</li>
+                <li>Problem-solving under pressure</li>
             </ul>
         </section>
-        <section>
+
+        <section id="projects">
             <h2>Projects</h2>
-            <h3>MDM Deployment</h3><p>Implemented Kandji MDM solution with Passport for seamless device management.</p><h3>Security Risk Assessment</h3><p>Conducted an in-depth security risk assessment for Fathom AI.</p>
+            <h3>MDM Deployment</h3>
+            <p>Implemented Kandji MDM solution with Passport for seamless device management.</p>
+            <h3>Security Risk Assessment</h3>
+            <p>Conducted an in-depth security risk assessment for Fathom AI.</p>
         </section>
-        <section class="contact">
+
+        <section id="contact" class="contact">
             <h2>Contact</h2>
             <p>Email: <a href="mailto:jobs@jithan10.com">jobs@jithan10.com</a></p>
             <p>LinkedIn: <a href="https://www.linkedin.com/in/jithan-tennakoon/" target="_blank">https://www.linkedin.com/in/jithan-tennakoon/</a></p>
