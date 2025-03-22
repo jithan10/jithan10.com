@@ -1,121 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C5W884X6NR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-C5W884X6NR');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources - JT's World</title>
+    <title>Jithan Tennakoon - Professional Portfolio</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #0e0e0e;
-            color: #eaeaea;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #ff5f6d, #ffc371);
-            padding: 2em;
-            text-align: center;
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; scroll-behavior: smooth; }
+        header { background: #333; color: #fff; padding: 10px 20px; }
+        header h1 { margin: 0; }
+        header p { margin: 5px 0 10px; }
+        nav { margin-top: 10px; }
+        nav a {
             color: #fff;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
+            text-decoration: none;
+            margin-right: 15px;
             font-weight: bold;
-            margin: 0;
         }
-
-        .container {
-            padding: 3em 2em;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section h2 {
-            font-size: 2.5em;
-            font-weight: 600;
-            margin-bottom: 1em;
-        }
-
-        .section p {
-            font-size: 1.2em;
-            line-height: 1.8;
-            font-weight: 300;
-            color: #bbb;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin: 1em 0;
-        }
-
-        ul li a {
-            color: #ffc371;
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: color 0.3s ease;
-        }
-
-        ul li a:hover {
-            color: #ff5f6d;
-        }
-
-        .footer {
-            text-align: center;
-            background-color: #1a1a1a;
-            padding: 2em;
-            color: #888;
-            font-size: 0.9em;
-        }
-
-        .footer a {
-            color: #ffc371;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
+        nav a:hover {
             text-decoration: underline;
         }
+        .container { padding: 20px; max-width: 800px; margin: 0 auto; }
+        section { margin-bottom: 20px; }
+        h2 { border-bottom: 2px solid #333; padding-bottom: 5px; }
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 10px; }
+        .contact a { color: #333; text-decoration: none; }
+        .contact a:hover { text-decoration: underline; }
     </style>
 </head>
-
 <body>
-    <div class="header">
-        <h1>Resources</h1>
-    </div>
-
+    <header>
+        <h1>Jithan Tennakoon</h1>
+        <p>IT Administrator | Cybersecurity Professional | Innovator</p>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <a href="resource1.html">Resources</a> <!-- New Resources page link -->
+        </nav>
+    </header>
     <div class="container">
-        <div class="section">
-            <h2>Useful Links and Directories</h2>
-       <ul>
-    <li><a href="infosec-news.html">InfoSec News Hub</a></li>
-    <li><a href="resource1.html">Resource 1</a></li>
-    <li><a href="https://mach49.zoom.us/my/m49.jithan" target="_blank">Zoom Link</a></li>
-    <li><a href="https://docs.google.com/document/d/1nXPZUKIRLSiyji-lFj9LXVVSq0fXo96-bWmCPtPlhyM/edit?usp=sharing" target="_blank">Google Doc</a></li>
-    <li><a href="resource3.html">Resource 3</a></li>
-    <!-- Add more resources here -->
-</ul>
-        </div>
-    </div>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Experienced IT Administrator with expertise in cybersecurity, team leadership, and technical support. Seeking to leverage my skills and experience in a challenging and dynamic role to drive innovation and efficiency.</p>
+        </section>
 
-    <div class="footer">
-        <p>&copy; 2024 JT. All rights reserved.</p>
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <ul>
+                <li>Google Cybersecurity Professional Certificate</li>
+                <li>Contributor to Aramco Cybersecurity Compliance Certification</li>
+            </ul>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            <h3>IT Support Administrator - Mach49 (August 2022 - Present)</h3>
+            <ul>
+                <li>Managed Kandji MDM deployments linked to Apple Business Manager.</li>
+                <li>Guided a remote user through setup on their first day, ensuring seamless access.</li>
+                <li>Conducted security risk assessments, including for Fathom AI.</li>
+            </ul>
+            <h3>Operations and Hardware Engineer - Alcatraz (June 2019 - July 2022)</h3>
+            <ul>
+                <li>Supervised hardware development and operations for security systems.</li>
+                <li>Implemented cross-functional workflows to streamline inventory management.</li>
+            </ul>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <h3>Technical Skills</h3>
+            <ul>
+                <li>IT Administration (Okta, Kandji MDM, Concur Solutions)</li>
+                <li>Cybersecurity tools and practices</li>
+                <li>Vendor and project management</li>
+            </ul>
+            <h3>Soft Skills</h3>
+            <ul>
+                <li>Team leadership and mentorship</li>
+                <li>Cross-functional communication</li>
+                <li>Problem-solving under pressure</li>
+            </ul>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <h3>MDM Deployment</h3>
+            <p>Implemented Kandji MDM solution with Passport for seamless device management.</p>
+            <h3>Security Risk Assessment</h3>
+            <p>Conducted an in-depth security risk assessment for Fathom AI.</p>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Contact</h2>
+            <p>Email: <a href="mailto:jobs@jithan10.com">jobs@jithan10.com</a></p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/jithan-tennakoon/" target="_blank">https://www.linkedin.com/in/jithan-tennakoon/</a></p>
+        </section>
     </div>
 </body>
-
 </html>
