@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Enable SSH on Robot (Linux)</title>
+  <title>Enable SSH on Kali Linux</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; color: #222; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      color: #222;
+    }
     h1 { color: #333; }
     h2 { color: #444; }
     code, pre {
@@ -35,48 +40,45 @@
 </head>
 <body>
 
-  <h1>🚀 Enable SSH on the Robot (Linux)</h1>
+  <h1>Enable SSH on Kali Linux</h1>
 
   <section>
-    <h2>🔍 1. Check if SSH is Installed</h2>
+    <h2>1. Check if SSH is Installed</h2>
     <pre><code>which sshd</code></pre>
-    <p>If nothing returns, you may need to install it. Otherwise, continue.</p>
+    <p>If no path is returned, SSH is not installed.</p>
   </section>
 
   <section>
-    <h2>📦 2. Install SSH Server (if needed)</h2>
-    <p>Only if <code>sshd</code> wasn't found in the previous step:</p>
+    <h2>2. Install OpenSSH Server (if needed)</h2>
     <pre><code>sudo apt update
 sudo apt install openssh-server</code></pre>
   </section>
 
   <section>
-    <h2>⚙️ 3. Enable and Start SSH</h2>
+    <h2>3. Enable and Start SSH</h2>
     <pre><code>sudo systemctl enable ssh
 sudo systemctl start ssh</code></pre>
-    <p>Check status:</p>
+    <p>To check the status:</p>
     <pre><code>sudo systemctl status ssh</code></pre>
-    <p>You should see "active (running)".</p>
   </section>
 
   <section>
-    <h2>🌐 4. Allow SSH Through Firewall (Optional)</h2>
+    <h2>4. Allow SSH Through the Firewall (Optional)</h2>
     <pre><code>sudo ufw allow ssh
 sudo ufw enable
 sudo ufw status</code></pre>
   </section>
 
   <section>
-    <h2>📡 5. Get the IP Address of the Robot</h2>
+    <h2>5. Get the IP Address</h2>
     <pre><code>ip a</code></pre>
-    <p>Look for the IP under <code>wlan0</code> or <code>eth0</code>, usually something like <code>192.168.x.x</code></p>
+    <p>Look for the IP under the network interface (e.g., wlan0 or eth0).</p>
   </section>
 
   <section>
-    <h2>💻 6. Connect via SSH from Another Device</h2>
-    <pre><code>ssh root@192.168.x.x</code></pre>
-    <p>If you're using a different user (like <code>st</code>):</p>
-    <pre><code>ssh st@192.168.x.x</code></pre>
+    <h2>6. Connect from Another Device</h2>
+    <pre><code>ssh username@192.168.x.x</code></pre>
+    <p>Replace <code>username</code> with your actual user and <code>192.168.x.x</code> with your system's IP.</p>
   </section>
 
   <a class="back-link" href="resources.html">← Back to Resources</a>
