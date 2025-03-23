@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Set Up Persistence in Kali Linux Live Boot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      color: #222;
+    }
+    h1 {
+      color: #333;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 10px;
+    }
+    h2 {
+      margin-top: 30px;
+      color: #444;
+    }
+    section {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+    .code-block {
+      position: relative;
+      margin-top: 10px;
+    }
+    pre {
+      background: #eee;
+      padding: 12px;
+      border-left: 4px solid #666;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      margin: 0;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 12px;
+      padding: 4px 8px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .copy-btn:hover {
+      background-color: #555;
+    }
+    .back-link {
+      margin-top: 40px;
+      display: inline-block;
+      color: #0066cc;
+      text-decoration: none;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Set Up Persistence in Kali Linux Live Boot</h1>
+
+  <section>
+    <h2>1. Identify Your USB Drive</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code1')">Copy</button>
+      <pre><code id="code1">lsblk</code></pre>
+    </div>
+    <p>Look for your USB drive, such as <code>/dev/sda</code> with partitions like <code>sda1</code> and <code>sda2</code>.</p>
+  </section>
+
+  <section>
+    <h2>2. Launch fdisk</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code2')">Copy</button>
+      <pre><code id="code2">sudo fdisk /dev/sdX</code></pre>
+    </div>
+    <p>Replace <code>X</code> with the correct letter for your USB device (e.g. <code>sda</code>).</p>
+  </section>
+
+  <section>
+    <h2>3. Create a New Partition</h2>
+    <p>In fdisk, follow these key presses:</p>
+    <ul>
+      <li><strong>n</strong> – Create a new partition</li>
+      <li><strong>p</strong> – Make it a primary partition</li>
+      <li><strong>3</strong> – Partition number (or next available)</li>
+      <li><strong>Enter</strong> – Accept default start sector</li>
+      <li><strong>Enter</strong> – Accept default end sector</li>
+      <li><strong>w</strong> – Write changes and exit</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Format the New Partition</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code3')">Copy</button>
+      <pre><code id="code3">sudo mkfs.ext4 -L persistence /dev/sda3</code></pre>
+    </div>
+    <p>Replace <code>/dev/sda3</code> with your new partition if different.</p>
+  </section>
+
+  <section>
+    <h2>5. Create and Mount Directory</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code4')">Copy</button>
+      <pre><code id="code4">sudo mkdir -p /mnt/my_usb
+sudo mount /dev/sda3 /mnt/my_usb</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Add Persistence Configuration</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code5')">Copy</button>
+      <pre><code id="code5">echo "/ union" | sudo tee /mnt/my_usb/persistence.conf</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>7. Unmount the Partition</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code6')">Copy</button>
+      <pre><code id="code6">sudo umount /mnt/my_usb</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>8. Reboot and Use Persistence Mode</h2>
+    <p>Reboot your system and select <strong>"Live USB Persistence"</strong> from the Kali boot menu.</p>
+  </section>
+
+  <a class="back-link" href="resources.html">← Back to Resources</a>
+
+  <script>
+    function copyToClipboard(id) {
+      const code = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.querySelector(`[onclick="copyToClipboard('${id}')"]`);
+        const original = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(() => btn.textContent = original, 1500);
+      });
+    }
+  </script>
+
+</body>
+</html>
