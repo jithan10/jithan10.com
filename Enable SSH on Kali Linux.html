@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Enable SSH on Kali Linux</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      color: #222;
+    }
+    h1 {
+      color: #333;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 10px;
+    }
+    h2 {
+      margin-top: 30px;
+      color: #444;
+    }
+    section {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+    .code-block {
+      position: relative;
+      margin-top: 10px;
+    }
+    pre {
+      background: #eee;
+      padding: 12px;
+      border-left: 4px solid #666;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      margin: 0;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 12px;
+      padding: 4px 8px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .copy-btn:hover {
+      background-color: #555;
+    }
+    .back-link {
+      margin-top: 40px;
+      display: inline-block;
+      color: #0066cc;
+      text-decoration: none;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Enable SSH on Kali Linux</h1>
+
+  <section>
+    <h2>1. Check if SSH is Installed</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code1')">Copy</button>
+      <pre><code id="code1">which sshd</code></pre>
+    </div>
+    <p>If no path is returned, SSH is not installed.</p>
+  </section>
+
+  <section>
+    <h2>2. Install OpenSSH Server (if needed)</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code2')">Copy</button>
+      <pre><code id="code2">sudo apt update
+sudo apt install openssh-server</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Enable and Start SSH</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code3')">Copy</button>
+      <pre><code id="code3">sudo systemctl enable ssh
+sudo systemctl start ssh</code></pre>
+    </div>
+    <p>To check the status:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code4')">Copy</button>
+      <pre><code id="code4">sudo systemctl status ssh</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Allow SSH Through the Firewall (Optional)</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code5')">Copy</button>
+      <pre><code id="code5">sudo ufw allow ssh
+sudo ufw enable
+sudo ufw status</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. Get the IP Address</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code6')">Copy</button>
+      <pre><code id="code6">ip a</code></pre>
+    </div>
+    <p>Look for the IP under the network interface, such as eth0 or wlan0.</p>
+  </section>
+
+  <section>
+    <h2>6. Connect from Another Device</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('code7')">Copy</button>
+      <pre><code id="code7">ssh username@192.168.x.x</code></pre>
+    </div>
+    <p>Replace <code>username</code> with your actual user and <code>192.168.x.x</code> with your device’s IP.</p>
+  </section>
+
+  <a class="back-link" href="resources.html">← Back to Resources</a>
+
+  <script>
+    function copyToClipboard(id) {
+      const code = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.querySelector(`[onclick="copyToClipboard('${id}')"]`);
+        const original = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(() => btn.textContent = original, 1500);
+      });
+    }
+  </script>
+
+</body>
+</html>
