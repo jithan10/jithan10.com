@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Graceful Shutdown Script on macOS</title>
+  <title>Graceful Shutdown Script on macOS (shutdownmac)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -58,13 +58,13 @@
 
   <h1>Graceful Shutdown Script on macOS</h1>
 
-  <p>This guide walks you through setting up a custom terminal command called <code>shutdown</code> that gracefully closes all open applications on your Mac and then shuts it down. It's especially useful if you want to avoid force quitting apps or losing unsaved work.</p>
+  <p>This guide walks you through setting up a custom terminal command called <code>shutdownmac</code> that gracefully closes all open applications on your Mac and then shuts it down. It's especially useful if you want a clean exit and don’t want to lose unsaved work.</p>
 
-  <h2>1. Create the shutdown script</h2>
+  <h2>1. Create the shutdownmac script</h2>
   <p>Open Terminal and run:</p>
   <div class="code-block">
     <button class="copy-button" onclick="copyToClipboard('code1')">Copy</button>
-    <pre id="code1">nano ~/shutdown</pre>
+    <pre id="code1">nano ~/shutdownmac</pre>
   </div>
 
   <p>Then paste the following into the file:</p>
@@ -75,19 +75,19 @@
 # Gracefully quit all user-facing apps
 osascript <<EOF
 tell application "System Events"
-    set quitapps to name of (every process whose background only is false)
-    repeat with closeall in quitapps
-        try
-            tell application closeall to quit
-        end try
-    end repeat
+  set quitapps to name of (every process whose background only is false)
+  repeat with closeall in quitapps
+    try
+      tell application closeall to quit
+    end try
+  end repeat
 end tell
 EOF
 
 # Wait 10 seconds for apps to close
 sleep 10
 
-# Shutdown with admin privileges
+# Shutdown the Mac
 sudo shutdown -h now</pre>
   </div>
 
@@ -100,13 +100,13 @@ sudo shutdown -h now</pre>
   <h2>3. Make it executable</h2>
   <div class="code-block">
     <button class="copy-button" onclick="copyToClipboard('code3')">Copy</button>
-    <pre id="code3">chmod +x ~/shutdown</pre>
+    <pre id="code3">chmod +x ~/shutdownmac</pre>
   </div>
 
-  <h2>4. Create an alias so you can use it like a command</h2>
+  <h2>4. Create an alias so you can run it like a command</h2>
   <div class="code-block">
     <button class="copy-button" onclick="copyToClipboard('code4')">Copy</button>
-    <pre id="code4">echo 'alias shutdown="$HOME/shutdown"' >> ~/.zprofile</pre>
+    <pre id="code4">echo 'alias shutdownmac="$HOME/shutdownmac"' >> ~/.zprofile</pre>
   </div>
 
   <p>Then reload your terminal profile:</p>
@@ -116,7 +116,7 @@ sudo shutdown -h now</pre>
   </div>
 
   <h2>✅ All Set!</h2>
-  <p>Now you can just type <code>shutdown</code> in your terminal and it will:</p>
+  <p>Now you can just type <code>shutdownmac</code> in your terminal and it will:</p>
   <ol>
     <li>Quit all open apps</li>
     <li>Wait 10 seconds</li>
