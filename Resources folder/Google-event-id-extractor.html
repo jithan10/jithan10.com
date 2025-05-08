@@ -21,7 +21,7 @@
     }
     textarea {
       margin-top: 1rem;
-      height: 140px;
+      height: 160px;
     }
     button {
       background-color: #f0f0f0;
@@ -37,19 +37,21 @@
   <h2>📅 Google Calendar Event ID Extractor</h2>
 
   <p>
-    This tool helps extract the internal <strong>Event ID</strong> from a Google Calendar event link,
-    which is useful for auditing and troubleshooting calendar activity using the
-    <em>Google Workspace Admin Console</em>.
+    This tool extracts the internal <strong>Event ID</strong> from a Google Calendar event link.
+    It's especially useful when you need to search for calendar activity inside the
+    <em>Google Workspace Admin Console → Calendar Audit Logs</em>.
   </p>
   <p>
-    Paste any Google Calendar link — whether it's a <code>tmeid=</code> URL or a
-    <code>/eventedit/</code> or <code>/duplicate/</code> link — and this tool will decode it and
-    show you the raw Event ID used for <strong>Admin Audit Log</strong> searches.
+    You can paste any event link (such as one containing <code>tmeid=</code> or from an
+    <code>/eventedit/</code> or <code>/duplicate/</code> URL), and the tool will decode the link and
+    show the <strong>first 26-character alphanumeric event ID</strong>.
   </p>
-  <p>
-    You can use this ID in:
+  <p style="background: #fff6c2; padding: 10px; border: 1px solid #eee;">
+    🔎 <strong>Note:</strong> This tool uses a regular expression to extract only the first
+    <code>26-character</code> lowercase alphanumeric string from the decoded event data.
     <br>
-    <code>Admin Console → Apps → Google Workspace → Calendar → Audit and Investigation</code>
+    This matches the format Google expects in audit log searches — so we intentionally strip
+    everything else to avoid errors.
   </p>
 
   <input type="text" id="calendarUrl" placeholder="Paste your Google Calendar link here..." />
