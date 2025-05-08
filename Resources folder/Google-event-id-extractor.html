@@ -21,7 +21,7 @@
     }
     textarea {
       margin-top: 1rem;
-      height: 120px;
+      height: 140px;
     }
     button {
       background-color: #f0f0f0;
@@ -35,7 +35,22 @@
 </head>
 <body>
   <h2>📅 Google Calendar Event ID Extractor</h2>
-  <p>Paste a Google Calendar event link (with <code>tmeid=</code> or <code>/duplicate/</code>) below:</p>
+
+  <p>
+    This tool helps extract the internal <strong>Event ID</strong> from a Google Calendar event link,
+    which is useful for auditing and troubleshooting calendar activity using the
+    <em>Google Workspace Admin Console</em>.
+  </p>
+  <p>
+    Paste any Google Calendar link — whether it's a <code>tmeid=</code> URL or a
+    <code>/eventedit/</code> or <code>/duplicate/</code> link — and this tool will decode it and
+    show you the raw Event ID used for <strong>Admin Audit Log</strong> searches.
+  </p>
+  <p>
+    You can use this ID in:
+    <br>
+    <code>Admin Console → Apps → Google Workspace → Calendar → Audit and Investigation</code>
+  </p>
 
   <input type="text" id="calendarUrl" placeholder="Paste your Google Calendar link here..." />
   <button onclick="extractEventID()">Extract Event ID</button>
@@ -43,38 +58,40 @@
   <textarea id="output" readonly placeholder="Results will appear here..."></textarea>
 
   <script>
-  function extractEventID() {
-    const url = document.getElementById('calendarUrl').value.trim();
-    const output = document.getElementById('output');
+    function extractEventID() {
+      const url = document.getElementById('calendarUrl').value.trim();
+      const output = document.getElementById('output');
 
-    try {
-      const parsed = new URL(url);
-      let tmeid = parsed.searchParams.get('tmeid');
+      try {
+        const parsed = new URL(url);
+        let tmeid = parsed.searchParams.get('tmeid');
 
-      // Fallback for /eventedit/ or /duplicate/ links
-      if (!tmeid) {
-        const match = parsed.pathname.match(/(?:duplicate|eventedit)\/([^/?#]+)/);
-        if (match && match[1]) {
-          tmeid = match[1];
+        // Fallback for /eventedit/ or /duplicate/ links
+        if (!tmeid) {
+          const match = parsed.pathname.match(/(?:duplicate|eventedit)\/([^/?#]+)/);
+          if (match && match[1]) {
+            tmeid = match[1];
+          }
         }
+
+        if (!tmeid) {
+          output.value = '❌ No valid event ID (tmeid) found in the URL.';
+          return;
+        }
+
+        // Decode and sanitize base64
+        const padded = tmeid + '='.repeat((4 - tmeid.length % 4) % 4);
+        const decoded = atob(padded.replace(/-/g, '+').replace(/_/g, '/')).replace(/\s+/g, '');
+
+        // Extract proper 26-character event ID
+        const matchId = decoded.match(/[a-z0-9]{26}/);
+        const eventId = matchId ? matchId[0] : '(❌ Could not extract clean event ID)';
+
+        output.value = `✅ Decoded String:\n${decoded}\n\n🆔 Event ID for Audit Logs:\n${eventId}`;
+      } catch (e) {
+        output.value = '❌ Error: ' + e.message;
       }
-
-      if (!tmeid) {
-        output.value = '❌ No valid event ID (tmeid) found in the URL.';
-        return;
-      }
-
-      // Pad Base64, decode, clean, and format for Admin console
-      const padded = tmeid + '='.repeat((4 - tmeid.length % 4) % 4);
-      const decoded = atob(padded.replace(/-/g, '+').replace(/_/g, '/')).replace(/\s+/g, '');
-      const matchId = decoded.match(/[a-z0-9]{26}/);
-      const eventId = matchId ? matchId[0] : '(Could not extract clean event ID)';
-
-      output.value = `✅ Decoded String:\n${decoded}\n\n🆔 Event ID for Audit Logs:\n${eventId}`;
-    } catch (e) {
-      output.value = '❌ Error: ' + e.message;
     }
-  }
-</script>
+  </script>
 </body>
 </html>
