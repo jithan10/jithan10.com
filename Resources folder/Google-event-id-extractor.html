@@ -53,7 +53,7 @@
 
         // Fallback if tmeid not found, try extracting from /duplicate/ or /eventedit/
         if (!tmeid) {
-          const match = parsed.pathname.match(/(?:duplicate|eventedit)\\/([^/?#]+)/);
+          const match = parsed.pathname.match(/(?:duplicate|eventedit)\/([^/?#]+)/);
           if (match && match[1]) {
             tmeid = match[1];
           }
