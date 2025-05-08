@@ -67,7 +67,8 @@
       // Pad Base64, decode, clean, and format for Admin console
       const padded = tmeid + '='.repeat((4 - tmeid.length % 4) % 4);
       const decoded = atob(padded.replace(/-/g, '+').replace(/_/g, '/')).replace(/\s+/g, '');
-      const eventId = decoded.split('@')[0].replace(/\+/g, '-').replace(/\//g, '_');
+      const matchId = decoded.match(/[a-z0-9]{26}/);
+      const eventId = matchId ? matchId[0] : '(Could not extract clean event ID)';
 
       output.value = `✅ Decoded String:\n${decoded}\n\n🆔 Event ID for Audit Logs:\n${eventId}`;
     } catch (e) {
