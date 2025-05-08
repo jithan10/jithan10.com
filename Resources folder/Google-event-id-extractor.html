@@ -43,37 +43,37 @@
   <textarea id="output" readonly placeholder="Results will appear here..."></textarea>
 
   <script>
-    function extractEventID() {
-      const url = document.getElementById('calendarUrl').value.trim();
-      const output = document.getElementById('output');
+  function extractEventID() {
+    const url = document.getElementById('calendarUrl').value.trim();
+    const output = document.getElementById('output');
 
-      try {
-        const parsed = new URL(url);
-        let tmeid = parsed.searchParams.get('tmeid');
+    try {
+      const parsed = new URL(url);
+      let tmeid = parsed.searchParams.get('tmeid');
 
-        // Fallback if tmeid not found, try extracting from /duplicate/ or /eventedit/
-        if (!tmeid) {
-          const match = parsed.pathname.match(/(?:duplicate|eventedit)\/([^/?#]+)/);
-          if (match && match[1]) {
-            tmeid = match[1];
-          }
+      // Fallback for /eventedit/ or /duplicate/ links
+      if (!tmeid) {
+        const match = parsed.pathname.match(/(?:duplicate|eventedit)\/([^/?#]+)/);
+        if (match && match[1]) {
+          tmeid = match[1];
         }
-
-        if (!tmeid) {
-          output.value = '❌ No valid event ID (tmeid) found in the URL.';
-          return;
-        }
-
-        // Clean and decode base64
-        const padded = tmeid + '='.repeat((4 - tmeid.length % 4) % 4);
-        const decoded = atob(padded.replace(/-/g, '+').replace(/_/g, '/')).replace(/\\s+/g, '');
-        const eventId = decoded.split('@')[0].replace(/\\+/g, '-').replace(/\\//g, '_');
-
-        output.value = `✅ Decoded String:\n${decoded}\n\n🆔 Event ID for Audit Logs:\n${eventId}`;
-      } catch (e) {
-        output.value = '❌ Error: ' + e.message;
       }
+
+      if (!tmeid) {
+        output.value = '❌ No valid event ID (tmeid) found in the URL.';
+        return;
+      }
+
+      // Pad Base64, decode, clean, and format for Admin console
+      const padded = tmeid + '='.repeat((4 - tmeid.length % 4) % 4);
+      const decoded = atob(padded.replace(/-/g, '+').replace(/_/g, '/')).replace(/\s+/g, '');
+      const eventId = decoded.split('@')[0].replace(/\+/g, '-').replace(/\//g, '_');
+
+      output.value = `✅ Decoded String:\n${decoded}\n\n🆔 Event ID for Audit Logs:\n${eventId}`;
+    } catch (e) {
+      output.value = '❌ Error: ' + e.message;
     }
-  </script>
+  }
+</script>
 </body>
 </html>
