@@ -3,52 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <title>Google Calendar Event ID Extractor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial, sans-serif; padding: 2rem; background: #f9f9f9; }
-    input, button, textarea { font-size: 1rem; padding: 0.5rem; width: 100%; max-width: 600px; }
-    textarea { margin-top: 1rem; height: 100px; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f9f9f9;
+      color: #333;
+    }
+    input, button, textarea {
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      width: 100%;
+      max-width: 800px;
+      box-sizing: border-box;
+    }
+    textarea {
+      margin-top: 1rem;
+      height: 120px;
+    }
+    button {
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e0e0e0;
+    }
   </style>
 </head>
 <body>
-  <h2>Google Calendar Event ID Extractor</h2>
-  <p>Paste a Google Calendar event link containing <code>tmeid</code> below:</p>
+  <h2>📅 Google Calendar Event ID Extractor</h2>
+  <p>Paste a Google Calendar event link (with <code>tmeid=</code> or <code>/duplicate/</code>) below:</p>
+
   <input type="text" id="calendarUrl" placeholder="Paste your Google Calendar link here..." />
   <button onclick="extractEventID()">Extract Event ID</button>
+
   <textarea id="output" readonly placeholder="Results will appear here..."></textarea>
 
- <script>
-  function extractEventID() {
-    const url = document.getElementById('calendarUrl').value.trim();
-    const output = document.getElementById('output');
+  <script>
+    function extractEventID() {
+      const url = document.getElementById('calendarUrl').value.trim();
+      const output = document.getElementById('output');
 
-    try {
-      const parsed = new URL(url);
-      let tmeid = parsed.searchParams.get('tmeid');
+      try {
+        const parsed = new URL(url);
+        let tmeid = parsed.searchParams.get('tmeid');
 
-      if (!tmeid) {
-        // Try extracting from the pathname (for duplicate/eventedit links)
-        const match = parsed.pathname.match(/(?:duplicate|eventedit)\/([^/?#]+)/);
-        if (match && match[1]) {
-          tmeid = match[1];
+        // Fallback if tmeid not found, try extracting from /duplicate/ or /eventedit/
+        if (!tmeid) {
+          const match = parsed.pathname.match(/(?:duplicate|eventedit)\\/([^/?#]+)/);
+          if (match && match[1]) {
+            tmeid = match[1];
+          }
         }
+
+        if (!tmeid) {
+          output.value = '❌ No valid event ID (tmeid) found in the URL.';
+          return;
+        }
+
+        // Clean and decode base64
+        const padded = tmeid + '='.repeat((4 - tmeid.length % 4) % 4);
+        const decoded = atob(padded.replace(/-/g, '+').replace(/_/g, '/')).replace(/\\s+/g, '');
+        const eventId = decoded.split('@')[0].replace(/\\+/g, '-').replace(/\\//g, '_');
+
+        output.value = `✅ Decoded String:\n${decoded}\n\n🆔 Event ID for Audit Logs:\n${eventId}`;
+      } catch (e) {
+        output.value = '❌ Error: ' + e.message;
       }
-
-      if (!tmeid) {
-        output.value = 'No event ID found in URL.';
-        return;
-      }
-
-      const padded = tmeid + '='.repeat((4 - tmeid.length % 4) % 4);
-      const decoded = atob(padded.replace(/-/g, '+').replace(/_/g, '/'));
-      const eventId = decoded.split('@')[0]
-                             .replace(/\+/g, '-')
-                             .replace(/\//g, '_');
-
-      output.value = `Decoded String: ${decoded}\nEvent ID for Audit Logs: ${eventId}`;
-    } catch (e) {
-      output.value = 'Error parsing URL or decoding Base64: ' + e.message;
     }
-  }
-</script>
+  </script>
 </body>
 </html>
