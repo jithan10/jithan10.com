@@ -16,28 +16,39 @@
   <button onclick="extractEventID()">Extract Event ID</button>
   <textarea id="output" readonly placeholder="Results will appear here..."></textarea>
 
-  <script>
-    function extractEventID() {
-      const url = document.getElementById('calendarUrl').value;
-      const output = document.getElementById('output');
-      try {
-        const urlParams = new URL(url).searchParams;
-        const tmeid = urlParams.get('tmeid');
-        if (!tmeid) {
-          output.value = 'No tmeid found in URL.';
-          return;
+ <script>
+  function extractEventID() {
+    const url = document.getElementById('calendarUrl').value.trim();
+    const output = document.getElementById('output');
+
+    try {
+      const parsed = new URL(url);
+      let tmeid = parsed.searchParams.get('tmeid');
+
+      if (!tmeid) {
+        // Try extracting from the pathname (for duplicate/eventedit links)
+        const match = parsed.pathname.match(/(?:duplicate|eventedit)\/([^/?#]+)/);
+        if (match && match[1]) {
+          tmeid = match[1];
         }
-        // Decode base64
-        const padded = tmeid + '='.repeat((4 - tmeid.length % 4) % 4);
-        const decoded = atob(padded.replace(/-/g, '+').replace(/_/g, '/'));
-        const eventId = decoded.split('@')[0]
-                               .replace(/\+/g, '-')
-                               .replace(/\//g, '_');
-        output.value = `Decoded String: ${decoded}\nEvent ID for Audit Logs: ${eventId}`;
-      } catch (e) {
-        output.value = 'Error parsing URL or decoding Base64: ' + e.message;
       }
+
+      if (!tmeid) {
+        output.value = 'No event ID found in URL.';
+        return;
+      }
+
+      const padded = tmeid + '='.repeat((4 - tmeid.length % 4) % 4);
+      const decoded = atob(padded.replace(/-/g, '+').replace(/_/g, '/'));
+      const eventId = decoded.split('@')[0]
+                             .replace(/\+/g, '-')
+                             .replace(/\//g, '_');
+
+      output.value = `Decoded String: ${decoded}\nEvent ID for Audit Logs: ${eventId}`;
+    } catch (e) {
+      output.value = 'Error parsing URL or decoding Base64: ' + e.message;
     }
-  </script>
+  }
+</script>
 </body>
 </html>
