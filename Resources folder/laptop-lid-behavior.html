@@ -8,14 +8,15 @@
         .container { max-width: 900px; margin: auto; background: #fff; padding: 20px 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         h1 { font-size: 28px; margin-bottom: 10px; }
         h2 { margin-top: 30px; color: #444; }
-        pre { background: #272822; color: #f8f8f2; padding: 12px; border-radius: 6px; overflow-x: auto; font-size: 14px; }
+        pre { background: #272822; color: #f8f8f2; padding: 12px; border-radius: 6px; overflow-x: auto; font-size: 14px; position: relative; }
         code { background: #eee; padding: 2px 5px; border-radius: 3px; }
         .note { background: #eaf4ff; border-left: 5px solid #0078d4; padding: 12px; margin: 20px 0; }
         .step { margin-bottom: 25px; }
-        button.copy-btn { background: #0078d4; color: #fff; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; float: right; margin-top: -38px; position: relative; }
+        button.copy-btn { background: #0078d4; color: #fff; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; position: absolute; top: 8px; right: 8px; }
         button.copy-btn:hover { background: #005ea2; }
         a.back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #0078d4; }
         a.back-link:hover { text-decoration: underline; }
+        .code-container { position: relative; }
     </style>
     <script>
         function copyToClipboard(id) {
@@ -33,21 +34,33 @@
         <div class="step">
             <h2>1. Set Default Lid Behavior</h2>
             <p>Edit <code>/etc/systemd/logind.conf</code> and set the lid switch behavior:</p>
-            <button class="copy-btn" onclick="copyToClipboard('code1')">Copy</button>
-            <pre id="code1">sudo nano /etc/systemd/logind.conf</pre>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyToClipboard('code1')">Copy</button>
+                <pre id="code1">sudo nano /etc/systemd/logind.conf</pre>
+            </div>
             <p>Add or edit these lines:</p>
-            <pre>HandleLidSwitch=ignore
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyToClipboard('code2')">Copy</button>
+                <pre id="code2">HandleLidSwitch=ignore
 HandleLidSwitchDocked=ignore</pre>
+            </div>
             <p>Restart logind:</p>
-            <pre>sudo systemctl restart systemd-logind</pre>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyToClipboard('code3')">Copy</button>
+                <pre id="code3">sudo systemctl restart systemd-logind</pre>
+            </div>
         </div>
 
         <div class="step">
             <h2>2. Create the Script</h2>
             <p>This script dynamically changes the lid behavior depending on power state:</p>
-            <button class="copy-btn" onclick="copyToClipboard('code2')">Copy</button>
-            <pre id="code2">sudo nano /usr/local/bin/lid-power-handler.sh</pre>
-            <pre>#!/bin/bash
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyToClipboard('code4')">Copy</button>
+                <pre id="code4">sudo nano /usr/local/bin/lid-power-handler.sh</pre>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyToClipboard('code5')">Copy</button>
+                <pre id="code5">#!/bin/bash
 LID_CONF="/etc/systemd/logind.conf"
 
 apply_setting() {
@@ -64,16 +77,24 @@ while true; do
     fi
     sleep 10
 done</pre>
+            </div>
             <p>Make it executable:</p>
-            <pre>sudo chmod +x /usr/local/bin/lid-power-handler.sh</pre>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyToClipboard('code6')">Copy</button>
+                <pre id="code6">sudo chmod +x /usr/local/bin/lid-power-handler.sh</pre>
+            </div>
         </div>
 
         <div class="step">
             <h2>3. Create a Systemd Service</h2>
             <p>Set up a service so this script runs in the background:</p>
-            <button class="copy-btn" onclick="copyToClipboard('code3')">Copy</button>
-            <pre id="code3">sudo nano /etc/systemd/system/lid-power-handler.service</pre>
-            <pre>[Unit]
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyToClipboard('code7')">Copy</button>
+                <pre id="code7">sudo nano /etc/systemd/system/lid-power-handler.service</pre>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyToClipboard('code8')">Copy</button>
+                <pre id="code8">[Unit]
 Description=Dynamic Lid Close Behavior Based on Power State
 After=multi-user.target
 
@@ -83,13 +104,17 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target</pre>
+            </div>
         </div>
 
         <div class="step">
             <h2>4. Enable and Start the Service</h2>
             <p>Reload systemd and start the new service:</p>
-            <pre>sudo systemctl daemon-reload
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyToClipboard('code9')">Copy</button>
+                <pre id="code9">sudo systemctl daemon-reload
 sudo systemctl enable --now lid-power-handler.service</pre>
+            </div>
         </div>
 
         <div class="note">
