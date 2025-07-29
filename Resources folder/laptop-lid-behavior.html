@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laptop Lid Behavior When Powered On (Ubuntu 18.04)</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: auto; background: #fff; padding: 20px 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1 { font-size: 28px; margin-bottom: 10px; }
+        h2 { margin-top: 30px; color: #444; }
+        pre { background: #272822; color: #f8f8f2; padding: 12px; border-radius: 6px; overflow-x: auto; font-size: 14px; }
+        code { background: #eee; padding: 2px 5px; border-radius: 3px; }
+        .note { background: #eaf4ff; border-left: 5px solid #0078d4; padding: 12px; margin: 20px 0; }
+        .step { margin-bottom: 25px; }
+        button.copy-btn { background: #0078d4; color: #fff; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; float: right; margin-top: -38px; position: relative; }
+        button.copy-btn:hover { background: #005ea2; }
+        a.back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #0078d4; }
+        a.back-link:hover { text-decoration: underline; }
+    </style>
+    <script>
+        function copyToClipboard(id) {
+            var content = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(content).then(() => alert("Copied to clipboard!"));
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <a class="back-link" href="resources.html">&larr; Back to Resources</a>
+        <h1>Laptop Lid Behavior When Powered On (Ubuntu 18.04)</h1>
+        <p>This guide configures your laptop running Ubuntu 18.04.3 to <strong>do nothing when the lid closes while on AC power</strong> but <strong>suspend when on battery</strong>. Great for using your ThinkPad X1 Carbon or other laptops as a docked workstation without auto-sleep.</p>
+
+        <div class="step">
+            <h2>1. Set Default Lid Behavior</h2>
+            <p>Edit <code>/etc/systemd/logind.conf</code> and set the lid switch behavior:</p>
+            <button class="copy-btn" onclick="copyToClipboard('code1')">Copy</button>
+            <pre id="code1">sudo nano /etc/systemd/logind.conf</pre>
+            <p>Add or edit these lines:</p>
+            <pre>HandleLidSwitch=ignore
+HandleLidSwitchDocked=ignore</pre>
+            <p>Restart logind:</p>
+            <pre>sudo systemctl restart systemd-logind</pre>
+        </div>
+
+        <div class="step">
+            <h2>2. Create the Script</h2>
+            <p>This script dynamically changes the lid behavior depending on power state:</p>
+            <button class="copy-btn" onclick="copyToClipboard('code2')">Copy</button>
+            <pre id="code2">sudo nano /usr/local/bin/lid-power-handler.sh</pre>
+            <pre>#!/bin/bash
+LID_CONF="/etc/systemd/logind.conf"
+
+apply_setting() {
+    local setting=$1
+    sudo sed -i "s/^HandleLidSwitch=.*/HandleLidSwitch=$setting/" $LID_CONF
+    systemd-inhibit --what=handle-lid-switch --why="AC power override" --mode=block sleep 0
+}
+
+while true; do
+    if on_ac_power; then
+        apply_setting "ignore"
+    else
+        apply_setting "suspend"
+    fi
+    sleep 10
+done</pre>
+            <p>Make it executable:</p>
+            <pre>sudo chmod +x /usr/local/bin/lid-power-handler.sh</pre>
+        </div>
+
+        <div class="step">
+            <h2>3. Create a Systemd Service</h2>
+            <p>Set up a service so this script runs in the background:</p>
+            <button class="copy-btn" onclick="copyToClipboard('code3')">Copy</button>
+            <pre id="code3">sudo nano /etc/systemd/system/lid-power-handler.service</pre>
+            <pre>[Unit]
+Description=Dynamic Lid Close Behavior Based on Power State
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/local/bin/lid-power-handler.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target</pre>
+        </div>
+
+        <div class="step">
+            <h2>4. Enable and Start the Service</h2>
+            <p>Reload systemd and start the new service:</p>
+            <pre>sudo systemctl daemon-reload
+sudo systemctl enable --now lid-power-handler.service</pre>
+        </div>
+
+        <div class="note">
+            <strong>Test it:</strong><br>
+            - Plugged in → Lid close = <strong>does nothing</strong>.<br>
+            - On battery → Lid close = <strong>suspends</strong>.
+        </div>
+    </div>
+</body>
+</html>
