@@ -1,106 +1,291 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jithan Tennakoon - Professional Portfolio</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; scroll-behavior: smooth; }
-        header { background: #333; color: #fff; padding: 10px 20px; }
-        header h1 { margin: 0; }
-        header p { margin: 5px 0 10px; }
-        nav { margin-top: 10px; }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .container { padding: 20px; max-width: 800px; margin: 0 auto; }
-        section { margin-bottom: 20px; }
-        h2 { border-bottom: 2px solid #333; padding-bottom: 5px; }
-        ul { list-style: none; padding: 0; }
-        li { margin-bottom: 10px; }
-        .contact a { color: #333; text-decoration: none; }
-        .contact a:hover { text-decoration: underline; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jithan Tennakoon — IT Administrator • Cybersecurity • Innovator</title>
+  <meta name="description" content="IT Administrator with cybersecurity focus. Kandji/ABM, Okta, Google Workspace, incident response, and executive support. Based in Redwood City, CA." />
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Jithan Tennakoon — IT Administrator & Cybersecurity" />
+  <meta property="og:description" content="Hands-on IT admin with leadership, automation, and security experience. View certifications, projects, and experience." />
+  <meta property="og:image" content="https://jithan10.github.io/jithan10.com/image.webp" />
+  <meta property="og:url" content="https://jithan10.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    /* ---- Type & color system ---- */
+    :root {
+      --bg: #0b0c0f;
+      --panel: #111319;
+      --text: #e6e8eb;
+      --muted: #b4bac4;
+      --brand: #8ec5ff; /* subtle blue accent */
+      --border: #1e2230;
+      --link: #b7dcff;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --panel: #ffffff;
+        --text: #0b1220;
+        --muted: #475569;
+        --brand: #2563eb;
+        --border: #e5e7eb;
+        --link: #1d4ed8;
+        --shadow: 0 10px 24px rgba(2, 8, 23, .10);
+      }
+    }
+
+    /* Modern system font stack (Transitional / Humanist mix) */
+    /* Ref: modernfontstacks.com */
+    html { font-family: ui-serif, Charter, "Bitstream Charter", "Sitka Text", Cambria, "Noto Serif", "DejaVu Serif", Georgia, serif; }
+    body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* Layout */
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .section { padding: clamp(48px, 10vw, 96px) 0; }
+
+    /* Skip link */
+    .skip { position: absolute; left: -999px; top: -999px; background: var(--panel); color: var(--text); padding: .5rem .75rem; border-radius: .5rem; }
+    .skip:focus { left: 1rem; top: 1rem; box-shadow: var(--shadow); }
+
+    /* Header */
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(6px); background: color-mix(in oklab, var(--bg) 70%, transparent); border-bottom: 1px solid var(--border); transition: all .25s ease; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .875rem 0; }
+    .brand { font-weight: 700; letter-spacing: .2px; font-size: 1.05rem; }
+    nav ul { display: flex; gap: .75rem; list-style: none; padding: 0; margin: 0; }
+    nav a { display: inline-block; padding: .5rem .7rem; border-radius: .55rem; color: var(--text); text-decoration: none; font-size: .95rem; }
+    nav a:hover { background: var(--border); }
+    nav a.active { outline: 2px solid color-mix(in oklab, var(--brand) 75%, transparent); outline-offset: 2px; }
+
+    /* Mobile nav */
+    .menu-btn { display: none; }
+    @media (max-width: 760px) {
+      nav ul { display: none; }
+      .menu-btn { display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .75rem; background: var(--panel); border: 1px solid var(--border); border-radius: .6rem; color: var(--text); }
+      .menu-open nav ul { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin: .75rem 0 0; }
+      .nav { flex-wrap: wrap; }
+    }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(16px, 4vw, 48px); align-items: center; }
+    .eyebrow { color: var(--muted); font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.15; margin: .35rem 0 1rem; }
+    .lead { font-size: clamp(1rem, 1.4vw, 1.125rem); color: var(--muted); max-width: 60ch; }
+
+    .cta { display: flex; gap: .6rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .btn { appearance: none; border: 1px solid var(--border); background: var(--panel); color: var(--text); padding: .65rem .9rem; border-radius: .7rem; text-decoration: none; font-weight: 600; }
+    .btn.primary { background: color-mix(in oklab, var(--brand) 24%, var(--panel)); border-color: color-mix(in oklab, var(--brand) 40%, var(--border)); }
+    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+
+    .hero-card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 1.25rem; box-shadow: var(--shadow); }
+    .hero-meta { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .kpi { padding: .85rem; border: 1px dashed var(--border); border-radius: 14px; text-align: center; }
+    .kpi strong { display: block; font-size: 1.35rem; }
+
+    /* Section headings */
+    .h2 { font-size: clamp(1.35rem, 3.5vw, 2rem); margin: 0 0 1rem; line-height: 1.2; }
+    .rule { height: 1px; background: var(--border); border: 0; margin: .75rem 0 1.5rem; }
+
+    /* Lists */
+    .grid { display: grid; gap: 1rem; }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 900px) { .grid.cols-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr; } }
+
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 1rem 1.1rem; }
+    .muted { color: var(--muted); }
+
+    /* Footer */
+    footer { padding: 36px 0 64px; border-top: 1px solid var(--border); color: var(--muted); }
+
+    /* Utilities */
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    .tag { display:inline-block; font-size:.8rem; padding:.25rem .5rem; border:1px solid var(--border); background: var(--panel); border-radius:.5rem; color:var(--muted); }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Jithan Tennakoon</h1>
-        <p>IT Administrator | Cybersecurity Professional | Innovator</p>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#certifications">Certifications</a>
-            <a href="#experience">Experience</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-            <a href="resources.html">Resources</a> <!-- New Resources page link -->
-        </nav>
-    </header>
-    <div class="container">
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Experienced IT Administrator with expertise in cybersecurity, team leadership, and technical support. Seeking to leverage my skills and experience in a challenging and dynamic role to drive innovation and efficiency.</p>
-        </section>
-
-        <section id="certifications">
-            <h2>Certifications</h2>
-            <ul>
-                <li>Google Cybersecurity Professional Certificate</li>
-                <li>IT Support Certificate</li>
-                 <li>Jamf100</li>
-            </ul>
-        </section>
-
-        <section id="experience">
-            <h2>Experience</h2>
-            <h3>IT Support Administrator - Mach49 (August 2022 - Present)</h3>
-            <ul>
-                <li>Managed Kandji MDM deployments linked to Apple Business Manager.</li>
-                <li>Guided a remote user through setup on their first day, ensuring seamless access.</li>
-                <li>Conducted security risk assessments, including for AI tools.</li>
-            </ul>
-            <h3>Operations and Hardware Engineer - Alcatraz (June 2019 - July 2022)</h3>
-            <ul>
-                <li>Supervised hardware development and operations for security systems.</li>
-                <li>Implemented cross-functional workflows to streamline inventory management.</li>
-            </ul>
-        </section>
-
-        <section id="skills">
-            <h2>Skills</h2>
-            <h3>Technical Skills</h3>
-            <ul>
-                <li>IT Administration (Okta, Kandji MDM, Concur Solutions)</li>
-                <li>Cybersecurity tools and practices</li>
-                <li>Vendor and project management</li>
-            </ul>
-            <h3>Soft Skills</h3>
-            <ul>
-                <li>Team leadership and mentorship</li>
-                <li>Cross-functional communication</li>
-                <li>Problem-solving under pressure</li>
-            </ul>
-        </section>
-
-        <section id="projects">
-            <h2>Projects</h2>
-            <h3>MDM Deployment</h3>
-            <p>Implemented Kandji MDM solution with Passport for seamless device management.</p>
-            <h3>Security Risk Assessment</h3>
-            <p>Conducted an in-depth security risk assessment for Fathom AI.</p>
-        </section>
-
-        <section id="contact" class="contact">
-            <h2>Contact</h2>
-            <p>Email: <a href="mailto:jobs@jithan10.com">jobs@jithan10.com</a></p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/jithan-tennakoon/" target="_blank">https://www.linkedin.com/in/jithan-tennakoon/</a></p>
-        </section>
+  <a class="skip" href="#main">Skip to content</a>
+  <header id="siteHeader">
+    <div class="container nav">
+      <div class="brand">Jithan Tennakoon</div>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+      <nav id="primaryNav" aria-label="Primary">
+        <ul>
+          <li><a href="#about" class="active">About</a></li>
+          <li><a href="#certs">Certifications</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#resources">Resources</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
+
+  <main id="main" class="container">
+    <!-- HERO -->
+    <section class="section" id="about">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">IT Administrator · Cybersecurity · Innovator</div>
+          <h1>Practical IT leadership, strong security, smooth onboarding.</h1>
+          <p class="lead">Experienced IT Administrator with deep hands‑on expertise across device management, identity & access, and executive support. I design resilient systems and workflows that help teams ship faster and stay secure.</p>
+          <div class="cta">
+            <a class="btn primary" href="/resume.pdf" target="_blank" rel="noopener">Download résumé</a>
+            <a class="btn" href="#contact">Get in touch</a>
+            <span class="tag" title="Location">Redwood City, CA</span>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Key highlights">
+          <div class="hero-meta">
+            <div class="kpi"><strong>300+ </strong><span class="muted">users supported</span></div>
+            <div class="kpi"><strong>25+ </strong><span class="muted">onboards per quarter</span></div>
+            <div class="kpi"><strong>Zero‑touch</strong><span class="muted"> ABM + Kandji</span></div>
+            <div class="kpi"><strong>Security</strong><span class="muted"> audits & DLP</span></div>
+          </div>
+        </aside>
+      </div>
+      <hr class="rule" />
+      <p class="muted">I prefer not to list email/phone publicly; use the contact section below.</p>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="section" id="certs" aria-labelledby="certs-title">
+      <h2 class="h2" id="certs-title">Certifications</h2>
+      <div class="grid cols-3">
+        <div class="card">Google Cybersecurity Professional Certificate</div>
+        <div class="card">IT Support Certificate</div>
+        <div class="card">Jamf 100</div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience" aria-labelledby="exp-title">
+      <h2 class="h2" id="exp-title">Experience</h2>
+      <article class="card" style="margin-bottom:1rem">
+        <h3 class="sr-only">Mach49</h3>
+        <p><strong>IT Support Administrator — Mach49</strong> <span class="muted">(Aug 2022 – Present)</span></p>
+        <ul>
+          <li>Managed Kandji MDM deployments integrated with Apple Business Manager.</li>
+          <li>Guided remote first‑day setups for execs and staff to ensure seamless access.</li>
+          <li>Led security risk assessments and DLP initiatives, including AI tool reviews.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3 class="sr-only">Alcatraz</h3>
+        <p><strong>Operations & Hardware Engineer — Alcatraz</strong> <span class="muted">(Jun 2019 – Jul 2022)</span></p>
+        <ul>
+          <li>Supervised hardware development and operations for security systems.</li>
+          <li>Implemented cross‑functional workflows that streamlined inventory control.</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <h2 class="h2" id="skills-title">Skills</h2>
+      <div class="grid cols-3">
+        <div class="card"><strong>Device & Identity</strong><br><span class="muted">Kandji, ABM/DEP, Jamf, Okta, Google Workspace</span></div>
+        <div class="card"><strong>Security</strong><br><span class="muted">DLP, zero‑trust, audits, incident response</span></div>
+        <div class="card"><strong>Automation</strong><br><span class="muted">Bash/PowerShell, PopClip, Zapier, Python basics</span></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (placeholder to keep spine) -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <h2 class="h2" id="projects-title">Projects</h2>
+      <div class="card">
+        Case studies coming soon. Meanwhile, explore <a href="/resources.html">Resources</a> for scripts and how‑tos.
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <h2 class="h2" id="contact-title">Contact</h2>
+      <div class="card">
+        <p class="muted">Use this quick form — it goes to me directly. No public email posted.</p>
+        <form class="grid cols-2" name="contact" method="POST" data-netlify="true" action="https://formspree.io/f/your-id">
+          <input type="hidden" name="form-name" value="contact" />
+          <label> Name<br><input required name="name" placeholder="Your name"/></label>
+          <label> How to reach you<br><input required name="reply" placeholder="Email or phone"/></label>
+          <label class="" style="grid-column:1/-1"> Message<br><textarea required name="message" rows="4" placeholder="What can I help with?"></textarea></label>
+          <div><button class="btn primary" type="submit">Send</button></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- RESOURCES -->
+    <section class="section" id="resources" aria-labelledby="resources-title">
+      <h2 class="h2" id="resources-title">Resources</h2>
+      <div class="grid cols-3">
+        <a class="card" href="/resources.html">Resources index →</a>
+        <a class="card" href="/resources2.html">Robot OS: Update root password →</a>
+        <a class="card" href="/resources3.html">Robot OS: Enable SSH →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Jithan Tennakoon. Built with semantic HTML, accessible color contrast, and a lightweight system‑font stack.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const body = document.body;
+    const btn = document.getElementById('menuBtn');
+    btn?.addEventListener('click', () => {
+      const open = body.classList.toggle('menu-open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+
+    // Active link highlight on scroll (IntersectionObserver)
+    const links = document.querySelectorAll('nav a');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const id = '#' + e.target.id;
+        const link = document.querySelector(`nav a[href="${id}"]`);
+        if (link) {
+          if (e.isIntersecting) link.classList.add('active');
+          else link.classList.remove('active');
+        }
+      });
+    }, { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 });
+    sections.forEach(s => s && obs.observe(s));
+
+    // Header compression on scroll
+    const header = document.getElementById('siteHeader');
+    let last = 0;
+    addEventListener('scroll', () => {
+      const y = scrollY;
+      header.style.transform = y > last ? 'translateY(-6px)' : 'translateY(0)';
+      header.style.boxShadow = y > 8 ? 'var(--shadow)' : 'none';
+      last = y;
+    }, { passive: true });
+
+    // Basic form styles (no external CSS reset)
+    document.querySelectorAll('input, textarea').forEach(el => {
+      el.style.width = '100%';
+      el.style.padding = '.7rem .8rem';
+      el.style.background = 'var(--panel)';
+      el.style.border = '1px solid var(--border)';
+      el.style.color = 'var(--text)';
+      el.style.borderRadius = '.6rem';
+      el.style.marginTop = '.35rem';
+    });
+    document.querySelectorAll('label').forEach(l => { l.style.fontWeight = '600'; });
+  </script>
 </body>
 </html>
