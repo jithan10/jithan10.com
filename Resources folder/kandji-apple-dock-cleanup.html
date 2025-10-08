@@ -1,13 +1,30 @@
-<section id="dock-cleanup">
-  <h2>Kandji Apple Dock Cleanup Script</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kandji Apple Dock Cleanup Script</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: #222; margin: 40px; }
+    h1 { font-size: 1.8em; color: #000; margin-bottom: 0.3em; }
+    p { max-width: 800px; line-height: 1.6; }
+    pre { background: #1e1e1e; color: #dcdcdc; padding: 15px; border-radius: 10px; overflow-x: auto; }
+    .copy-btn { background: #007aff; color: #fff; border: none; border-radius: 8px; padding: 6px 12px; cursor: pointer; float: right; }
+    .copy-btn:hover { background: #005bb5; }
+  </style>
+</head>
+<body>
+  <a href="../resources.html" style="text-decoration:none; color:#007aff;">← Back to Resources</a>
+  <h1>Kandji Apple Dock Cleanup Script</h1>
+
   <p>
-    This script removes all default apps from the macOS Dock for existing users and future user templates.
-    It works on macOS Monterey through Sequoia and is perfect for deployment via Kandji to give users a clean Dock on setup.
+    This script safely clears all preloaded macOS Dock items for existing and future users without needing <code>dockutil</code>.
+    It’s compatible with macOS Monterey through Sequoia and can be re-run safely. Ideal for Kandji deployment to provide a clean, minimal Dock setup for new users.
   </p>
 
-  <div class="code-block">
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-    <pre><code>#!/bin/zsh
+  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+  <pre><code>#!/bin/zsh
 # Simple: empty the Dock for all users + default template (no dockutil required)
 # macOS 12+ (Monterey) through Sequoia compatible. Safe to re-run.
 
@@ -67,16 +84,16 @@ main() {
 }
 
 main</code></pre>
-  </div>
 
-  <p><strong>Usage:</strong> Save as <code>kandji-apple-dock-cleanup.sh</code> and deploy via Kandji with “Run as root” enabled.</p>
-</section>
+  <p><strong>Usage:</strong> Save as <code>kandji-apple-dock-cleanup.sh</code> and deploy in Kandji as a “Run as root” script item.</p>
 
-<script>
-function copyCode(btn) {
-  const code = btn.nextElementSibling.innerText;
-  navigator.clipboard.writeText(code);
-  btn.textContent = 'Copied!';
-  setTimeout(() => (btn.textContent = 'Copy'), 2000);
-}
-</script>
+  <script>
+  function copyCode(btn) {
+    const code = btn.nextElementSibling.innerText;
+    navigator.clipboard.writeText(code);
+    btn.textContent = 'Copied!';
+    setTimeout(() => (btn.textContent = 'Copy'), 2000);
+  }
+  </script>
+</body>
+</html>
