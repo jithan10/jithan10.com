@@ -1,0 +1,82 @@
+<section id="dock-cleanup">
+  <h2>Kandji Apple Dock Cleanup Script</h2>
+  <p>
+    This script removes all default apps from the macOS Dock for existing users and future user templates.
+    It works on macOS Monterey through Sequoia and is perfect for deployment via Kandji to give users a clean Dock on setup.
+  </p>
+
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><code>#!/bin/zsh
+# Simple: empty the Dock for all users + default template (no dockutil required)
+# macOS 12+ (Monterey) through Sequoia compatible. Safe to re-run.
+
+set -euo pipefail
+
+is_real_user() {
+  local u="$1"
+  local uid
+  uid="$(/usr/bin/id -u "$u" 2>/dev/null || echo 0)"
+  [[ "$uid" -ge 500 && "$u" != "root" ]]
+}
+
+user_home() {
+  /usr/bin/dscl . -read "/Users/$1" NFSHomeDirectory 2>/dev/null | awk '{print $2}'
+}
+
+empty_user_dock() {
+  local user="$1" home="$2"
+  [[ -d "$home" ]] || return
+  local plist="$home/Library/Preferences/com.apple.dock.plist"
+
+  echo "Clearing Dock for $user ($home)…"
+  /bin/mkdir -p "$home/Library/Preferences"
+
+  /usr/bin/defaults write "$plist" persistent-apps -array
+  /usr/bin/defaults write "$plist" persistent-others -array
+  /usr/bin/defaults write "$plist" show-recents -bool false
+  /usr/bin/defaults write "$plist" autohide -bool false
+
+  /usr/sbin/chown "$user":"$(/usr/bin/id -gn "$user")" "$plist" 2>/dev/null || true
+  su -l "$user" -c "/usr/bin/killall Dock" 2>/dev/null || true
+}
+
+empty_default_template() {
+  echo "Clearing Dock in default user templates…"
+  for tmpl in "/System/Library/User Template/"*; do
+    [[ -d "$tmpl" ]] || continue
+    local plist="$tmpl/Library/Preferences/com.apple.dock.plist"
+    /bin/mkdir -p "$tmpl/Library/Preferences"
+
+    /usr/bin/defaults write "$plist" persistent-apps -array
+    /usr/bin/defaults write "$plist" persistent-others -array
+    /usr/bin/defaults write "$plist" show-recents -bool false
+
+    /usr/sbin/chown -R root:wheel "$tmpl"
+  done
+}
+
+main() {
+  /usr/bin/dscl . -list /Users | while read -r u; do
+    is_real_user "$u" || continue
+    h="$(user_home "$u")"
+    [[ -n "$h" ]] && empty_user_dock "$u" "$h"
+  done
+  empty_default_template
+  echo "Done."
+}
+
+main</code></pre>
+  </div>
+
+  <p><strong>Usage:</strong> Save as <code>kandji-apple-dock-cleanup.sh</code> and deploy via Kandji with “Run as root” enabled.</p>
+</section>
+
+<script>
+function copyCode(btn) {
+  const code = btn.nextElementSibling.innerText;
+  navigator.clipboard.writeText(code);
+  btn.textContent = 'Copied!';
+  setTimeout(() => (btn.textContent = 'Copy'), 2000);
+}
+</script>
