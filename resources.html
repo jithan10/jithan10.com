@@ -1,91 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Resources - Jithan Tennakoon</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: #f9f9f9;
-            color: #333;
-        }
-        h1 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .back-link {
-            margin-top: 30px;
-            display: inline-block;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resources — Jithan Tennakoon</title>
+  <meta name="description" content="Scripts and how-tos: Kandji/macOS, Linux, Google Workspace, and more." />
+
+  <style>
+    :root{
+      --bg:#0b0c0f;--panel:#111319;--text:#e6e8eb;--muted:#b4bac4;--brand:#8ec5ff;
+      --border:#1e2230;--link:#b7dcff;--shadow:0 10px 30px rgba(0,0,0,.35)
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f8fafc;--panel:#fff;--text:#0b1220;--muted:#475569;--brand:#2563eb;
+        --border:#e5e7eb;--link:#1d4ed8;--shadow:0 10px 24px rgba(2,8,23,.10)
+      }
+    }
+    html{font-family:ui-serif,Charter,"Bitstream Charter","Sitka Text",Cambria,"Noto Serif","DejaVu Serif",Georgia,serif}
+    body{margin:0;background:var(--bg);color:var(--text);line-height:1.6}
+    .container{width:min(1100px,92vw);margin:0 auto}
+    .section{padding:clamp(48px,10vw,96px) 0}
+
+    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.2) blur(6px);
+      background:color-mix(in oklab,var(--bg) 70%,transparent);border-bottom:1px solid var(--border)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.875rem 0}
+    .brand{font-weight:700;letter-spacing:.2px;font-size:1.05rem}
+    .back{color:var(--link);text-decoration:none;padding:.5rem .7rem;border-radius:.55rem}
+    .back:hover{background:var(--border)}
+
+    h1{font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.2;margin:.35rem 0 .25rem}
+    .lead{color:var(--muted);max-width:65ch;margin:0 0 1rem}
+
+    .grid{display:grid;gap:1rem}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:900px){.grid.cols-3{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.grid.cols-3{grid-template-columns:1fr}}
+
+    .card{display:block;background:var(--panel);border:1px solid var(--border);
+      border-radius:14px;padding:1rem 1.1rem;text-decoration:none;color:var(--text);
+      box-shadow:var(--shadow);transition:transform .15s ease}
+    .card:hover{transform:translateY(-2px)}
+    .card .title{font-weight:700;margin:0 0 .25rem}
+    .card .meta{color:var(--muted);font-size:.95rem;margin:0}
+
+    .rule{height:1px;background:var(--border);border:0;margin:1.25rem 0 1.5rem}
+    footer{padding:36px 0 64px;border-top:1px solid var(--border);color:var(--muted)}
+  </style>
 </head>
 <body>
-    <h1>Resources</h1>
-    <p>This page links to detailed guides and documentation I've written.</p>
+  <header>
+    <div class="container nav">
+      <div class="brand">Jithan Tennakoon</div>
+      <a class="back" href="index.html">← Back to Home</a>
+    </div>
+  </header>
 
-    <ul>
-        <li>
-            <a href="Update Root Password on Robot OS.html" target="_blank" rel="noopener noreferrer">
-                🛠️ Update Root Password on (Linux)
-            </a>
-        </li>
-        <li>
-            <a href="Resources folder/Enable SSH on Kali Linux.html" target="_blank" rel="noopener noreferrer">
-                🔐 Enable SSH on Robot (Linux)
-            </a>
-        </li>
-        <li>
-            <a href="Set Up Persistence in Kali Linux Live Boot.html" target="_blank" rel="noopener noreferrer">
-                 Set Up Persistence in Kali Linux Live Boot
-            </a>
-        </li>
-        <li>
-            <a href="https://sites.google.com/view/jithan10/home" target="_blank" rel="noopener noreferrer">
-                🌐 Google Site Resource Hub
-            </a>
-        </li>
-        <li>
-            <a href="factory_reset_package.zip" target="_blank" rel="noopener noreferrer" download>
-                🪟 Download Windows Factory Reset Package (ZIP)
-            </a>
-        </li>
-        <li>
-            <a href="Resources folder/Graceful Shutdown Script.html" target="_blank" rel="noopener noreferrer">
-                💻 Graceful Shutdown Script on macOS
-            </a>
-        </li>
-        <li>
-            <a href="Resources folder/Google-event-id-extractor.html" target="_blank" rel="noopener noreferrer">
-                📅 Google Calendar Event ID Extractor
-            </a>
-        </li>
+  <main class="container">
+    <section class="section">
+      <h1>Resources</h1>
+      <p class="lead">Curated scripts and guides I use for device management, security hardening, and day-to-day ops.</p>
+      <hr class="rule" />
 
-        <li>
-  <a href="Resources folder/laptop-lid-behavior.html" target="_blank" rel="noopener noreferrer">
-    Laptop Lid Behavior When Powered On (Ubuntu)
-  </a>
-</li>
-    <li>       
-<a class="card" href="/resources/kandji-apple-dock-cleanup.html">
-  Kandji Apple Dock Cleanup Script →
-</a>
-   </li>
-        
-    </ul>
+      <div class="grid cols-3">
+        <!-- Linux / Robot OS -->
+        <a class="card" href="Update%20Root%20Password%20on%20Robot%20OS.html" target="_blank" rel="noopener noreferrer">
+          <p class="title">🔑 Update Root Password (Linux)</p>
+          <p class="meta">Robot OS walkthrough — chroot, mount, and reset safely.</p>
+        </a>
 
-    <a class="back-link" href="index.html">← Back to Home</a>
+        <a class="card" href="Resources%20folder/Enable%20SSH%20on%20Kali%20Linux.html" target="_blank" rel="noopener noreferrer">
+          <p class="title">🔐 Enable SSH on Robot (Kali)</p>
+          <p class="meta">Password auth + service enablement; notes on persistence.</p>
+        </a>
+
+        <a class="card" href="Set%20Up%20Persistence%20in%20Kali%20Linux%20Live%20Boot.html" target="_blank" rel="noopener noreferrer">
+          <p class="title">💾 Kali Live Persistence</p>
+          <p class="meta">Create & verify persistent storage for live boots.</p>
+        </a>
+
+        <!-- macOS / Kandji -->
+        <a class="card" href="Resources%20folder/kandji-apple-dock-cleanup.html" target="_blank" rel="noopener noreferrer">
+          <p class="title">🧼 Kandji Apple Dock Cleanup</p>
+          <p class="meta">Clears default Dock for all users & templates (no dockutil).</p>
+        </a>
+
+        <a class="card" href="Resources%20folder/Graceful%20Shutdown%20Script.html" target="_blank" rel="noopener noreferrer">
+          <p class="title">💻 Graceful Shutdown Script (macOS)</p>
+          <p class="meta">Prompted, clean shutdown steps for support scenarios.</p>
+        </a>
+
+        <!-- Google Workspace / Utilities -->
+        <a class="card" href="Resources%20folder/Google-event-id-extractor.html" target="_blank" rel="noopener noreferrer">
+          <p class="title">📅 Google Calendar Event ID Extractor</p>
+          <p class="meta">Grab event IDs fast for troubleshooting or automations.</p>
+        </a>
+
+        <!-- Ubuntu / Misc -->
+        <a class="card" href="Resources%20folder/laptop-lid-behavior.html" target="_blank" rel="noopener noreferrer">
+          <p class="title">🖥️ Laptop Lid Behavior (Ubuntu)</p>
+          <p class="meta">Control sleep/boot actions when lid is closed.</p>
+        </a>
+
+        <!-- External hub & downloads -->
+        <a class="card" href="https://sites.google.com/view/jithan10/home" target="_blank" rel="noopener noreferrer">
+          <p class="title">🌐 Google Site Resource Hub</p>
+          <p class="meta">Additional docs, notes, and quick links.</p>
+        </a>
+
+        <a class="card" href="factory_reset_package.zip" target="_blank" rel="noopener noreferrer" download>
+          <p class="title">🪟 Windows Factory Reset Package (ZIP)</p>
+          <p class="meta">Toolkit for wipe/reset with helper scripts.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Jithan Tennakoon — semantic HTML, accessible contrast, and a lightweight system-font stack.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
